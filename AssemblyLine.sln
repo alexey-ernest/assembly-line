@@ -5,7 +5,13 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyLine", "AssemblyLine\AssemblyLine.csproj", "{95F02BB4-D818-4996-BC3B-BA61C4DF6A08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyLine.Tests", "..\Visual Studio 2013\Projects\AssemblyLine\AssemblyLine.Tests\AssemblyLine.Tests.csproj", "{390464F2-96D2-47AC-AB32-2D0E045FAE08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyLine.Common", "AssemblyLine.Common\AssemblyLine.Common.csproj", "{5C844D73-5B86-4432-8138-3564BDB05A84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyLine.AuditMicroservice", "AssemblyLine.AuditMicroservice\AssemblyLine.AuditMicroservice.csproj", "{81A88D9B-DACA-4795-9ADA-A78042EB3EC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyLine.EmailMicroservice", "AssemblyLine.EmailMicroservice\AssemblyLine.EmailMicroservice.csproj", "{ED6AEF91-859D-42BB-A0DB-DA20D39E7888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyLine.OutlookMicroservice", "AssemblyLine.OutlookMicroservice\AssemblyLine.OutlookMicroservice.csproj", "{B0194947-240B-47B3-8D0D-F478B619A1E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +23,22 @@ Global
 		{95F02BB4-D818-4996-BC3B-BA61C4DF6A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95F02BB4-D818-4996-BC3B-BA61C4DF6A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95F02BB4-D818-4996-BC3B-BA61C4DF6A08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{390464F2-96D2-47AC-AB32-2D0E045FAE08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{390464F2-96D2-47AC-AB32-2D0E045FAE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{390464F2-96D2-47AC-AB32-2D0E045FAE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{390464F2-96D2-47AC-AB32-2D0E045FAE08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C844D73-5B86-4432-8138-3564BDB05A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C844D73-5B86-4432-8138-3564BDB05A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C844D73-5B86-4432-8138-3564BDB05A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C844D73-5B86-4432-8138-3564BDB05A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81A88D9B-DACA-4795-9ADA-A78042EB3EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81A88D9B-DACA-4795-9ADA-A78042EB3EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81A88D9B-DACA-4795-9ADA-A78042EB3EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81A88D9B-DACA-4795-9ADA-A78042EB3EC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED6AEF91-859D-42BB-A0DB-DA20D39E7888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED6AEF91-859D-42BB-A0DB-DA20D39E7888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED6AEF91-859D-42BB-A0DB-DA20D39E7888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED6AEF91-859D-42BB-A0DB-DA20D39E7888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0194947-240B-47B3-8D0D-F478B619A1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0194947-240B-47B3-8D0D-F478B619A1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0194947-240B-47B3-8D0D-F478B619A1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0194947-240B-47B3-8D0D-F478B619A1E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
