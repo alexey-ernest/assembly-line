@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ServiceBus">
+      <HintPath>..\packages\ServiceBus.v1_1.1.0.5\lib\net40-full\Microsoft.ServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.0.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="SendGrid.SmtpApi">
       <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
     </Reference>
@@ -39,6 +45,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,15 +59,22 @@
     <Compile Include="Audit\IAuditService.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
+    <Compile Include="Initializers\IInitializable.cs" />
     <Compile Include="Constants\ServiceBusSubscriptions.cs" />
     <Compile Include="Constants\ServiceBusTopics.cs" />
     <Compile Include="Email\EmailModel.cs" />
     <Compile Include="Email\TraceMailService.cs" />
+    <Compile Include="Initializers\ServiceBusOutlookInitializer.cs" />
+    <Compile Include="Initializers\ServiceBusAuditInitializer.cs" />
+    <Compile Include="Initializers\ServiceBusEmailInitializer.cs" />
+    <Compile Include="Logging\ILogService.cs" />
+    <Compile Include="Logging\TraceLogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Email\IMailService.cs" />
     <Compile Include="Email\SendgridMailService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

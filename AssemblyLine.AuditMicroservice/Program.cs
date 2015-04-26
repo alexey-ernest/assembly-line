@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AssemblyLine.Common.Audit;
 using AssemblyLine.Common.Configuration;
 using AssemblyLine.Common.Constants;
-using Microsoft.ServiceBus;
+using AssemblyLine.Common.Initializers;
 using Microsoft.ServiceBus.Messaging;
 
 namespace AssemblyLine.AuditMicroservice
@@ -43,18 +43,11 @@ namespace AssemblyLine.AuditMicroservice
         private static SubscriptionClient EsteblishConnection()
         {
             var configurationProvider = new ConfigurationProvider();
-            var connectionString = configurationProvider.Get(SettingNames.ServiceBusConnectionString);
+            string connectionString = configurationProvider.Get(SettingNames.ServiceBusConnectionString);
 
             // Create topic and subscription
-            var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
-            if (!namespaceManager.TopicExists(ServiceBusTopics.Audit))
-            {
-                namespaceManager.CreateTopic(ServiceBusTopics.Audit);
-            }
-            if (!namespaceManager.SubscriptionExists(ServiceBusTopics.Audit, ServiceBusSubscriptions.AllMessages))
-            {
-                namespaceManager.CreateSubscription(ServiceBusTopics.Audit, ServiceBusSubscriptions.AllMessages);
-            }
+            var initializer = new ServiceBusAuditInitializer(connectionString);
+            initializer.Initialize();
 
             return SubscriptionClient.CreateFromConnectionString(connectionString, ServiceBusTopics.Audit,
                 ServiceBusSubscriptions.AllMessages);

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AssemblyLine.Common.Configuration;
 using AssemblyLine.Common.Constants;
 using AssemblyLine.Common.Email;
+using AssemblyLine.Common.Initializers;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
 
@@ -47,15 +48,8 @@ namespace AssemblyLine.EmailMicroservice
             var connectionString = configurationProvider.Get(SettingNames.ServiceBusConnectionString);
 
             // Create topic and subscription
-            var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
-            if (!namespaceManager.TopicExists(ServiceBusTopics.Email))
-            {
-                namespaceManager.CreateTopic(ServiceBusTopics.Email);
-            }
-            if (!namespaceManager.SubscriptionExists(ServiceBusTopics.Email, ServiceBusSubscriptions.AllMessages))
-            {
-                namespaceManager.CreateSubscription(ServiceBusTopics.Email, ServiceBusSubscriptions.AllMessages);
-            }
+            var initializer = new ServiceBusEmailInitializer(connectionString);
+            initializer.Initialize();
             
             return SubscriptionClient.CreateFromConnectionString(connectionString, ServiceBusTopics.Email, ServiceBusSubscriptions.AllMessages);
         }
