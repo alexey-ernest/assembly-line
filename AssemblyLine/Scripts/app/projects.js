@@ -238,16 +238,10 @@
 
                 item.$isLoading = true;
 
-                initTeam(item.productionTeam, $scope.employees);
-                initTeam(item.procurementTeam, $scope.employees);
-
                 item.$update({ pid: $scope.pid }).then(function () {
                     item.$isLoading = false;
 
-                    $scope.item.productionTeam = item.productionTeam;
-                    $scope.item.procurementTeam = item.procurementTeam;
                     $scope.item = item;
-
                     initTeam(item.productionTeam, $scope.employees);
                     initTeam(item.procurementTeam, $scope.employees);
 

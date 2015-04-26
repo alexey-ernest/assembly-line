@@ -65,7 +65,10 @@ namespace AssemblyLine.DAL.Repositories
                 {
                     entity.ProductionTeam = await _teamRepository.EditAsync(entity.ProductionTeam);
                 }
-                original.ProductionTeam = entity.ProductionTeam;
+                else
+                {
+                    original.ProductionTeam = await _teamRepository.AddAsync(entity.ProductionTeam);
+                }
             }
             else
             {
@@ -78,7 +81,10 @@ namespace AssemblyLine.DAL.Repositories
                 {
                     entity.ProcurementTeam = await _teamRepository.EditAsync(entity.ProcurementTeam);
                 }
-                original.ProcurementTeam = entity.ProcurementTeam;
+                else
+                {
+                    original.ProcurementTeam = await _teamRepository.AddAsync(entity.ProcurementTeam);
+                }
             }
             else
             {

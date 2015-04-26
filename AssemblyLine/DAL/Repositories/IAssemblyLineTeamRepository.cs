@@ -5,6 +5,8 @@ namespace AssemblyLine.DAL.Repositories
 {
     public interface IAssemblyLineTeamRepository : IRepository
     {
+        Task<AssemblyLineTeam> AddAsync(AssemblyLineTeam entity);
+
         Task<AssemblyLineTeam> EditAsync(AssemblyLineTeam entity);
     }
 }
