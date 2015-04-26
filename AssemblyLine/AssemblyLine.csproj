@@ -225,10 +225,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\ProjectsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\Api\LinesController.cs" />
     <Compile Include="Controllers\Api\VehiclesController.cs" />
     <Compile Include="Controllers\Api\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
+    <Compile Include="DAL\Entities\Line.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
     <Compile Include="DAL\Entities\Meeting.cs" />
     <Compile Include="DAL\Entities\MeetingMember.cs" />
@@ -244,10 +246,12 @@
     <Compile Include="DAL\Entities\CycleMilestone.cs" />
     <Compile Include="DAL\Entities\MilestoneStatus.cs" />
     <Compile Include="DAL\Entities\ProjectStatus.cs" />
-    <Compile Include="DAL\Entities\ProjectTeam.cs" />
+    <Compile Include="DAL\Entities\AssemblyLineTeam.cs" />
     <Compile Include="DAL\Entities\Vehicle.cs" />
     <Compile Include="DAL\Repositories\IProjectRepository.cs" />
+    <Compile Include="DAL\Repositories\ILineRepository.cs" />
     <Compile Include="DAL\Repositories\ProjectRepository.cs" />
+    <Compile Include="DAL\Repositories\LineRepository.cs" />
     <Compile Include="DAL\Repositories\VehicleRepository.cs" />
     <Compile Include="DAL\Repositories\EmployeeRepository.cs" />
     <Compile Include="DAL\Repositories\IVehicleRepository.cs" />
@@ -277,6 +281,18 @@
     <Compile Include="Migrations\201504261339048_Vehicles.cs" />
     <Compile Include="Migrations\201504261339048_Vehicles.Designer.cs">
       <DependentUpon>201504261339048_Vehicles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261749117_Projects.cs" />
+    <Compile Include="Migrations\201504261749117_Projects.Designer.cs">
+      <DependentUpon>201504261749117_Projects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261831297_AssemblyLines.cs" />
+    <Compile Include="Migrations\201504261831297_AssemblyLines.Designer.cs">
+      <DependentUpon>201504261831297_AssemblyLines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261840222_RenameAssemblyLine.cs" />
+    <Compile Include="Migrations\201504261840222_RenameAssemblyLine.Designer.cs">
+      <DependentUpon>201504261840222_RenameAssemblyLine.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -323,6 +339,7 @@
     <Content Include="Scripts\app\constants.js" />
     <Content Include="Scripts\app\directives.js" />
     <Content Include="Scripts\app\projects.js" />
+    <Content Include="Scripts\app\lines.js" />
     <Content Include="Scripts\app\vehicles.js" />
     <Content Include="Scripts\app\employees.js" />
     <Content Include="Scripts\app\home.js" />
@@ -1116,6 +1133,7 @@
     <Content Include="Views\Home\_Employees.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\_Vehicles.cshtml" />
+    <Content Include="Views\Home\_Lines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1145,6 +1163,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504261339048_Vehicles.resx">
       <DependentUpon>201504261339048_Vehicles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261749117_Projects.resx">
+      <DependentUpon>201504261749117_Projects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261831297_AssemblyLines.resx">
+      <DependentUpon>201504261831297_AssemblyLines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261840222_RenameAssemblyLine.resx">
+      <DependentUpon>201504261840222_RenameAssemblyLine.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -2,7 +2,7 @@
 
 namespace AssemblyLine.DAL.Entities
 {
-    public class ProjectTeam
+    public class AssemblyLineTeam
     {
         public int Id { get; set; }
 

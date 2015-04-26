@@ -58,18 +58,6 @@
             $scope.isLoading = false;
             $scope.isAllLoaded = false;
 
-            // METHODS
-            $scope.nextPage = function () {
-                if ($scope.isAllLoaded || $scope.isLoading) {
-                    return;
-                }
-
-                $scope.filter.skip += $scope.filter.take;
-                filterItems();
-            };
-
-
-            // PRIVATE METHODS
             function filterItems() {
 
                 $scope.isLoading = true;
@@ -87,10 +75,19 @@
                         $scope.items = $scope.items.concat(data);
 
                         $scope.isLoading = false;
-                    }, function() {
+                    }, function () {
                         $scope.isLoading = false;
                         throw new Error();
                     });
+            };
+
+            $scope.nextPage = function () {
+                if ($scope.isAllLoaded || $scope.isLoading) {
+                    return;
+                }
+
+                $scope.filter.skip += $scope.filter.take;
+                filterItems();
             };
 
             function load() {

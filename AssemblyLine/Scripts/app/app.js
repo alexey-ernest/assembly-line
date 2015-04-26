@@ -9,7 +9,8 @@
         'assemblyLine.home',
         'assemblyLine.projects',
         'assemblyLine.employees',
-        'assemblyLine.vehicles'
+        'assemblyLine.vehicles',
+        'assemblyLine.lines'
     ]);
 
     // Third party libraries

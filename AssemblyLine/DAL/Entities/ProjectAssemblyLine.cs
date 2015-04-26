@@ -6,8 +6,10 @@
 
         public virtual Project Project { get; set; }
 
-        public virtual ProjectTeam ProductionTeam { get; set; }
+        public virtual Line Line { get; set; }
 
-        public virtual ProjectTeam ProcurementTeam { get; set; }
+        public virtual AssemblyLineTeam ProductionTeam { get; set; }
+
+        public virtual AssemblyLineTeam ProcurementTeam { get; set; }
     }
 }

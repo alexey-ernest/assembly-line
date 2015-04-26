@@ -1,7 +1,7 @@
 ﻿(function (window, angular) {
     'use strict';
 
-    var module = angular.module('assemblyLine.projects', [
+    var module = angular.module('assemblyLine.lines', [
         'constants',
         'ui.router',
         'services'
@@ -11,30 +11,30 @@
     module.config([
         '$stateProvider', 'userRoles', function ($stateProvider, userRoles) {
             $stateProvider
-                .state('app.projects', {
-                    url: '/projects',
-                    templateUrl: 'projects.html',
-                    controller: 'ProjectsCtrl',
+                .state('app.lines', {
+                    url: '/lines',
+                    templateUrl: 'lines.html',
+                    controller: 'LinesCtrl',
                     data: {
-                        pageTitle: 'Projects at Melnikov Assembly Line Application',
+                        pageTitle: 'Assembly Lines at Melnikov Assembly Line Application',
                         roles: [userRoles.all]
                     }
                 })
-                .state('app.projectdetails', {
-                    url: '/projects/{id:int}',
-                    templateUrl: 'projects.details.html',
-                    controller: 'ProjectDetailsCtrl',
+                .state('app.linedetails', {
+                    url: '/lines/{id:int}',
+                    templateUrl: 'lines.details.html',
+                    controller: 'LineDetailsCtrl',
                     data: {
-                        pageTitle: 'Project Details at Melnikov Assembly Line Application',
+                        pageTitle: 'Assembly Line Details at Melnikov Assembly Line Application',
                         roles: [userRoles.all]
                     }
                 })
-                .state('app.projectcreate', {
-                    url: '/projects/new',
-                    templateUrl: 'projects.create1.html',
-                    controller: 'ProjectCreateCtrl',
+                .state('app.linecreate', {
+                    url: '/lines/new',
+                    templateUrl: 'lines.create.html',
+                    controller: 'LineCreateCtrl',
                     data: {
-                        pageTitle: 'New Employee at Melnikov Assembly Line Application',
+                        pageTitle: 'New Assembly Line at Melnikov Assembly Line Application',
                         roles: [userRoles.all]
                     }
                 });
@@ -42,15 +42,15 @@
     ]);
 
     // Controllers
-    module.controller('ProjectsCtrl', [
-        '$scope', '$state', 'projectService',
-        function ($scope, $state, projectService) {
+    module.controller('LinesCtrl', [
+        '$scope', '$state', 'lineService',
+        function ($scope, $state, lineService) {
 
             // PROPERTIES
             $scope.items = [];
             $scope.filter = {
-                orderBy: 'Created',
-                orderByDesc: true,
+                orderBy: 'Name',
+                orderByDesc: false,
                 skip: 0,
                 take: 20
             };
@@ -58,11 +58,10 @@
             $scope.isLoading = false;
             $scope.isAllLoaded = false;
 
-            // PRIVATE METHODS
             function filterItems() {
 
                 $scope.isLoading = true;
-                return projectService.query($scope.filter)
+                return lineService.query($scope.filter)
                     .then(function (data) {
                         if (data.length < $scope.filter.take) {
                             $scope.isAllLoaded = true;
@@ -78,15 +77,10 @@
                         $scope.isLoading = false;
                     }, function () {
                         $scope.isLoading = false;
+                        throw new Error();
                     });
             };
 
-            function load() {
-                $scope.isLoading = true;
-                filterItems();
-            }
-
-            // METHODS
             $scope.nextPage = function () {
                 if ($scope.isAllLoaded || $scope.isLoading) {
                     return;
@@ -96,14 +90,19 @@
                 filterItems();
             };
 
+            function load() {
+                $scope.isLoading = true;
+                filterItems();
+            }
+
             // INIT
             load();
         }
     ]);
 
-    module.controller('ProjectDetailsCtrl', [
-        '$scope', '$state', 'projectService', '$stateParams',
-        function ($scope, $state, projectService, $stateParams) {
+    module.controller('LineDetailsCtrl', [
+        '$scope', '$state', 'lineService', '$stateParams',
+        function ($scope, $state, lineService, $stateParams) {
 
             $scope.item = null;
             $scope.isLoading = false;
@@ -125,7 +124,7 @@
             
             $scope.delete = function (item) {
                 item.$delete().then(function () {
-                    $state.go('^.projects');
+                    $state.go('^.lines');
                 }, function (reason) {
                     throw new Error(reason);
                 });
@@ -133,7 +132,7 @@
 
             function load(id) {
                 $scope.isLoading = true;
-                projectService.get(id).then(function (data) {
+                lineService.get(id).then(function(data) {
                     $scope.item = data;
                     $scope.isLoading = false;
                 }, function() {
@@ -145,50 +144,12 @@
         }
     ]);
 
-    module.controller('ProjectCreateCtrl', [
-        '$scope', '$state', 'projectService',
-        function ($scope, $state, projectService) {
-            
-        }
-    ]);
+    module.controller('LineCreateCtrl', [
+        '$scope', '$state', 'lineService',
+        function ($scope, $state, lineService) {
 
-    module.controller('ProjectCreate1Ctrl', [
-        '$scope', '$state', 'projectService', 'vehicleService',
-        function ($scope, $state, projectService, vehicleService) {
-
-            $scope.item = projectService.create({ name: 'New Project' });
-            $scope.vehicles = [];
-            $scope.assemblyLinesNumber = 0;
-
-            $scope.isLading = false;
-
-            function initVehicle(item, vehicles) {
-                if (item == null || item.vehicle == null) {
-                    return;
-                }
-
-                for (var i = 0; i < vehicles.length; i++) {
-
-                    if (item.vehicle.id !== vehicles[i].id) {
-                        continue;
-                    }
-
-                    item.vehicle = vehicles[i];
-                    break;
-                }
-            }
-
-            function loadVehicles() {
-                $scope.isLading = true;
-                vehicleService.query().then(function (data) {
-                    $scope.vehicles = data;
-                    initVehicle($scope.item, data);
-                    $scope.isLading = false;
-                }, function () {
-                    $scope.isLading = false;
-                    throw new Error('Could not load vehicles');
-                });
-            }
+            $scope.item = lineService.create({ name: 'New Assembly Line' });
+            $scope.isLoading = false;
 
             $scope.create = function (form, item) {
                 if (form.$invalid) {
@@ -198,15 +159,13 @@
                 item.$isLoading = true;
                 item.$save().then(function () {
                     item.$isLoading = false;
-                    $state.go('^.projects');
+                    $state.go('^.lines');
                 }, function (reason) {
                     item.$isLoading = false;
                     throw new Error(reason);
                 });
 
             };
-
-            loadVehicles();
         }
     ]);
 

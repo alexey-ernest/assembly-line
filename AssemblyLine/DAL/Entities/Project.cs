@@ -13,11 +13,14 @@ namespace AssemblyLine.DAL.Entities
         [Display(Name = "Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Vehicle")]
         public virtual Vehicle Vehicle { get; set; }
 
+        [Display(Name = "Vehicle Number")]
         public int? VehicleNumber { get; set; }
 
         [JsonIgnore]
+        [Display(Name = "Assembly Lines")]
         public virtual ICollection<ProjectAssemblyLine> AssemblyLines { get; set; }
 
         public DateTime Created { get; set; }
@@ -34,12 +37,12 @@ namespace AssemblyLine.DAL.Entities
         public virtual ProductionCycle Cycle { get; set; }
 
 
-        #region delivery parameters
+        #region Delivery Parameters
 
         [Display(Name = "Delivery Address")]
         public string DeliveryAddress { get; set; }
 
-        [Display(Name = "Delivery Phone")]
+        [Display(Name = "Contact Phone")]
         public string DeliveryPhone { get; set; }
 
         [Display(Name = "Contact Person")]

@@ -1,27 +1,27 @@
 ﻿@using AssemblyLine.DAL.Entities
-<script type="text/ng-template" id="vehicles.html">
+<script type="text/ng-template" id="lines.html">
 
-    <h1>Vehicles <a class="btn btn-default" ui-sref="^.vehiclecreate"><i class="glyphicon glyphicon-plus"></i></a></h1>
+    <h1>Assembly Lines <a class="btn btn-default" ui-sref="^.linecreate"><i class="glyphicon glyphicon-plus"></i></a></h1>
     <div class="list-group" infinite-scroll="nextPage()">
-        <a href="" ng-repeat="i in items" ui-sref="^.vehicledetails({id: i.id})" class="list-group-item">
+        <a href="" ng-repeat="i in items" ui-sref="^.linedetails({id: i.id})" class="list-group-item">
             {{i.name}}
         </a>
     </div>
 
     <div loader loader-if="isLoading"></div>
 
-    <p ng-if="items.length == 0 && !isLoading"><i>There are no vehicles.</i></p>
+    <p ng-if="items.length == 0 && !isLoading"><i>There are no assembly lines.</i></p>
 
 </script>
 
-<script type="text/ng-template" id="vehicles.details.html">
+<script type="text/ng-template" id="lines.details.html">
 
-    <h1>Vehicle Details</h1>
+    <h1>Assembly Line Details</h1>
 
     <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="update(itemForm, item)">
 
         <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Vehicle().Name)</label>
+            <label for="name" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Line().Name)</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
             </div>
@@ -30,7 +30,7 @@
         <p>&nbsp;</p>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a class="btn btn-default" ui-sref="^.vehicles">&larr; Back</a>
+                <a class="btn btn-default" ui-sref="^.lines">&larr; Back</a>
                 <button type="submit" class="btn btn-primary" ng-disabled="itemForm.$invalid || item.$isLoading">
                     <span ng-if="item.$isLoading === undefined">Save</span>
                     <span ng-if="item.$isLoading === false"><i class="fa fa-check"></i> Saved</span>
@@ -48,14 +48,14 @@
 
 </script>
 
-<script type="text/ng-template" id="vehicles.create.html">
+<script type="text/ng-template" id="lines.create.html">
 
-    <h1>New Vehicle</h1>
+    <h1>New Assembly Line</h1>
 
     <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="create(itemForm, item)">
 
         <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Vehicle().Name)</label>
+            <label for="name" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Line().Name)</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
             </div>
@@ -64,7 +64,7 @@
         <p>&nbsp;</p>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a class="btn btn-default" ui-sref="^.vehicles">&larr; Back</a>
+                <a class="btn btn-default" ui-sref="^.lines">&larr; Back</a>
                 <button type="submit" class="btn btn-primary" ng-disabled="itemForm.$invalid || item.$isLoading">
                     <span ng-if="item.$isLoading === undefined">Create</span>
                     <span ng-if="item.$isLoading === false"><i class="fa fa-check"></i> Created</span>

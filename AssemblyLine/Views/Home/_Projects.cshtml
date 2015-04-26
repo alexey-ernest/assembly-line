@@ -72,11 +72,11 @@
 
 </script>
 
-<script type="text/ng-template" id="projects.create1.html">
+<script type="text/ng-template" id="projects.create.html">
 
-    <h1>New Project Step 1</h1>
+    <h1>New Project</h1>
 
-    <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="next(itemForm, item)">
+    <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="create(itemForm, item)">
 
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().Name)</label>
@@ -84,57 +84,31 @@
                 <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
             </div>
         </div>
-        
-        <p>&nbsp;</p>
-        <div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-                <h4>Delivery Parameters</h4>
-            </div>
-        </div>
 
         <div class="form-group">
-            <label for="deliveryAddress" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryAddress)</label>
+            <label for="vehicle" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().Vehicle)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.deliveryAddress" ng-required />
+                <select id="vehicle" class="form-control" ng-model="item.vehicle" ng-options="v.name for v in vehicles"></select>
             </div>
         </div>
         <div class="form-group">
-            <label for="deliveryContactPerson" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryContactPerson)</label>
+            <label for="vehicleNumber" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().VehicleNumber)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="deliveryContactPerson" placeholder="" ng-model="item.deliveryContactPerson" />
+                <input type="number" step="1" min="0" class="form-control" id="vehicleNumber" placeholder="" ng-model="item.vehicleNumber" />
             </div>
         </div>
         <div class="form-group">
-            <label for="deliveryPhone" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryPhone)</label>
+            <label for="assemblyLines" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().AssemblyLines)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="deliveryPhone" placeholder="" ng-model="item.deliveryPhone" />
+                <input type="number" step="1" min="0" class="form-control" id="assemblyLines" placeholder="" ng-model="assemblyLinesNumber" />
             </div>
         </div>
 
         <p>&nbsp;</p>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a class="btn btn-default" ui-sref="^.projects">&larr; Back</a>
-                <a class="btn btn-default" ui-sref="^.step2">Next &rarr;</a>
-            </div>
-        </div>
-
-    </form>
-
-</script>
-
-<script type="text/ng-template" id="projects.create2.html">
-
-    <h1>New Project Step 2</h1>
-
-    <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="next(itemForm, item)">
-
-        
-        <p>&nbsp;</p>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <a class="btn btn-default" ui-sref="^.step1">&larr; Back</a>
-                <a class="btn btn-default" ui-sref="^.step3">Next &rarr;</a>
+                <a class="btn btn-default" ui-sref="^.^.projects">&larr; Back</a>
+                <a class="btn btn-default" ng-click="next(itemForm, item)">Next &rarr;</a>
             </div>
         </div>
 

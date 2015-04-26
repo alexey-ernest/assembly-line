@@ -50,6 +50,7 @@ namespace AssemblyLine
             container.RegisterType<IUserRepository, UserRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IEmployeeRepository, EmployeeRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IVehicleRepository, VehicleRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<ILineRepository, LineRepository>(new PerRequestLifetimeManager());
 
             // BLL
 

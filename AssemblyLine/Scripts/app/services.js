@@ -8,7 +8,7 @@
             return function(exception) {
 
                 var message = exception.message;
-                if (message == '[object Object]') {
+                if (message === '[object Object]') {
                     message = 'Unknown Error';
                 }
 
@@ -51,7 +51,7 @@
                     var filterExpr = null;
                     var filterParts = [];
 
-                    if (filter.name != null && filter.name !== '') {
+                    if (filter.name) {
                         filterParts.push("substringof('" + filter.name + "',FirstName) or substringof('" + filter.name  + "',LastName)");
                     }
                     if (filterParts.length > 0) {
@@ -61,16 +61,16 @@
                         params['$filter'] = filterExpr;
                     }
 
-                    if (filter.orderBy !== null && filter.orderBy !== '') {
+                    if (filter.orderBy) {
                         var order = filter.orderByDesc ? 'desc' : 'asc';
                         params['$orderby'] = filter.orderBy + ' ' + order;
                     }
 
-                    if (filter.skip !== null && filter.skip !== '') {
+                    if (filter.skip) {
                         params['$skip'] = filter.skip;
                     }
 
-                    if (filter.take != null && filter.take !== '') {
+                    if (filter.take) {
                         params['$top'] = filter.take;
                     }
 
@@ -116,13 +116,15 @@
                 },
                 query: function (filter) {
 
+                    filter = filter || {};
+
                     // OData params
                     var params = {};
 
                     var filterExpr = null;
                     var filterParts = [];
 
-                    if (filter.name != null && filter.name !== '') {
+                    if (filter.name) {
                         filterParts.push("substringof('" + filter.name + "',Name)");
                     }
                     if (filterParts.length > 0) {
@@ -132,16 +134,89 @@
                         params['$filter'] = filterExpr;
                     }
 
-                    if (filter.orderBy !== null && filter.orderBy !== '') {
+                    if (filter.orderBy) {
                         var order = filter.orderByDesc ? 'desc' : 'asc';
                         params['$orderby'] = filter.orderBy + ' ' + order;
                     }
 
-                    if (filter.skip !== null && filter.skip !== '') {
+                    if (filter.skip) {
                         params['$skip'] = filter.skip;
                     }
 
-                    if (filter.take != null && filter.take !== '') {
+                    if (filter.take) {
+                        params['$top'] = filter.take;
+                    }
+
+                    var deferred = $q.defer();
+
+                    resource.query(params, function (data) {
+                        deferred.resolve(data);
+                    }, function () {
+                        deferred.reject();
+                    });
+
+                    return deferred.promise;
+                }
+            };
+        }
+    ]);
+
+    module.factory('lineService', [
+        '$resource', '$q', function ($resource, $q) {
+
+            var url = '/api/lines';
+            var resource = $resource(url + '/:id',
+            { id: '@id' },
+            {
+                update: { method: 'PUT' }
+            });
+
+
+            return {
+                create: function (options) {
+                    return new resource(options);
+                },
+                get: function (id) {
+                    var deferred = $q.defer();
+
+                    resource.get({ id: id }, function (data) {
+                        deferred.resolve(data);
+                    }, function () {
+                        deferred.reject();
+                    });
+
+                    return deferred.promise;
+                },
+                query: function (filter) {
+
+                    filter = filter || {};
+
+                    // OData params
+                    var params = {};
+
+                    var filterExpr = null;
+                    var filterParts = [];
+
+                    if (filter.name) {
+                        filterParts.push("substringof('" + filter.name + "',Name)");
+                    }
+                    if (filterParts.length > 0) {
+                        filterExpr = filterParts.join(' and ');
+                    }
+                    if (filterExpr) {
+                        params['$filter'] = filterExpr;
+                    }
+
+                    if (filter.orderBy) {
+                        var order = filter.orderByDesc ? 'desc' : 'asc';
+                        params['$orderby'] = filter.orderBy + ' ' + order;
+                    }
+
+                    if (filter.skip) {
+                        params['$skip'] = filter.skip;
+                    }
+
+                    if (filter.take) {
                         params['$top'] = filter.take;
                     }
 
@@ -193,7 +268,7 @@
                     var filterExpr = null;
                     var filterParts = [];
 
-                    if (filter.name != null && filter.name !== '') {
+                    if (filter.name) {
                         filterParts.push("substringof('" + filter.name + "',Name)");
                     }
                     if (filterParts.length > 0) {
@@ -203,16 +278,16 @@
                         params['$filter'] = filterExpr;
                     }
 
-                    if (filter.orderBy !== null && filter.orderBy !== '') {
+                    if (filter.orderBy) {
                         var order = filter.orderByDesc ? 'desc' : 'asc';
                         params['$orderby'] = filter.orderBy + ' ' + order;
                     }
 
-                    if (filter.skip !== null && filter.skip !== '') {
+                    if (filter.skip) {
                         params['$skip'] = filter.skip;
                     }
 
-                    if (filter.take != null && filter.take !== '') {
+                    if (filter.take) {
                         params['$top'] = filter.take;
                     }
 
