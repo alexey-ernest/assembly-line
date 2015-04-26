@@ -4,7 +4,9 @@
     var module = angular.module('assemblyLine', [
         'constants',
         'ui.router',
-        'assemblyLine.home'
+        'assemblyLine.home',
+        'assemblyLine.projects',
+        'assemblyLine.employees'
     ]);
 
     // Third party libraries

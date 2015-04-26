@@ -4,16 +4,6 @@
     text-align: center;
 }
 
-a,
-a:link,
-a:visited,
-a:hover,
-a:target {
-    color: #0d80dc;
-    text-decoration: none;
-}
-
-
 .brand {
     height: 40px;
     background: url(images/brand.png) no-repeat center center;
@@ -34,6 +24,12 @@ a:target {
     border-top: 1px solid #dddddd;
     padding: 20px;
     margin-top: 50px;
+}
+
+@media(min-width: 992px) {
+    .page-container {
+        text-align: left;
+    }
 }
 
 /* Bootstrap Overridden */

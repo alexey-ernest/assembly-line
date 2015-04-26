@@ -2,7 +2,22 @@
     ViewBag.Title = "Assembly Line Application";
 }
 
-<div ui-view></div>
+<div class="panel page-container">
+    <div class="panel-heading"></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="" ui-sref="app.projects" class="list-group-item">Projects</a>
+                    <a href="" ui-sref="app.employees" class="list-group-item">Employees</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section TitleBinding { ng-bind="pageTitle" }
 
@@ -11,3 +26,5 @@
 }
 
 @Html.Partial("_Home")
+@Html.Partial("_Employees")
+@Html.Partial("_Projects")
