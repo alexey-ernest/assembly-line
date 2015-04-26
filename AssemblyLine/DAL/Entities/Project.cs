@@ -19,8 +19,11 @@ namespace AssemblyLine.DAL.Entities
         [Display(Name = "Vehicle Number")]
         public int? VehicleNumber { get; set; }
 
-        [JsonIgnore]
         [Display(Name = "Assembly Lines")]
+        public int? AssemblyLinesNumber { get; set; }
+
+        [Display(Name = "Assembly Lines")]
+        [JsonIgnore]
         public virtual ICollection<ProjectAssemblyLine> AssemblyLines { get; set; }
 
         public DateTime Created { get; set; }
@@ -49,7 +52,7 @@ namespace AssemblyLine.DAL.Entities
         public string DeliveryContactPerson { get; set; }
 
         [Display(Name = "Delivery Date")]
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
 
         #endregion
     }

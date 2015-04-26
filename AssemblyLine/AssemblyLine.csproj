@@ -223,13 +223,15 @@
     <Compile Include="Configuration\SettingNames.cs" />
     <Compile Include="Constants\UserRoles.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\ProjectsController.cs" />
+    <Compile Include="Controllers\Api\Projects\ProjectLinesController.cs" />
+    <Compile Include="Controllers\Api\Projects\ProjectsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\LinesController.cs" />
     <Compile Include="Controllers\Api\VehiclesController.cs" />
     <Compile Include="Controllers\Api\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
+    <Compile Include="DAL\Entities\LineStatus.cs" />
     <Compile Include="DAL\Entities\Line.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
     <Compile Include="DAL\Entities\Meeting.cs" />
@@ -248,8 +250,12 @@
     <Compile Include="DAL\Entities\ProjectStatus.cs" />
     <Compile Include="DAL\Entities\AssemblyLineTeam.cs" />
     <Compile Include="DAL\Entities\Vehicle.cs" />
+    <Compile Include="DAL\Repositories\AssemblyLineTeamRepository.cs" />
+    <Compile Include="DAL\Repositories\IAssemblyLineTeamRepository.cs" />
     <Compile Include="DAL\Repositories\IProjectRepository.cs" />
     <Compile Include="DAL\Repositories\ILineRepository.cs" />
+    <Compile Include="DAL\Repositories\IProjectLinesRepository.cs" />
+    <Compile Include="DAL\Repositories\ProjectLinesRepository.cs" />
     <Compile Include="DAL\Repositories\ProjectRepository.cs" />
     <Compile Include="DAL\Repositories\LineRepository.cs" />
     <Compile Include="DAL\Repositories\VehicleRepository.cs" />
@@ -294,11 +300,24 @@
     <Compile Include="Migrations\201504261840222_RenameAssemblyLine.Designer.cs">
       <DependentUpon>201504261840222_RenameAssemblyLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504261901012_AddAssemblyLinesNumber.cs" />
+    <Compile Include="Migrations\201504261901012_AddAssemblyLinesNumber.Designer.cs">
+      <DependentUpon>201504261901012_AddAssemblyLinesNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261911337_LineStatus.cs" />
+    <Compile Include="Migrations\201504261911337_LineStatus.Designer.cs">
+      <DependentUpon>201504261911337_LineStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261925248_NotRequiredProjectDeliveryDate.cs" />
+    <Compile Include="Migrations\201504261925248_NotRequiredProjectDeliveryDate.Designer.cs">
+      <DependentUpon>201504261925248_NotRequiredProjectDeliveryDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\ProjectLineListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -1172,6 +1191,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504261840222_RenameAssemblyLine.resx">
       <DependentUpon>201504261840222_RenameAssemblyLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261901012_AddAssemblyLinesNumber.resx">
+      <DependentUpon>201504261901012_AddAssemblyLinesNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261911337_LineStatus.resx">
+      <DependentUpon>201504261911337_LineStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261925248_NotRequiredProjectDeliveryDate.resx">
+      <DependentUpon>201504261925248_NotRequiredProjectDeliveryDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AssemblyLine.Common.Exceptions;
 using AssemblyLine.DAL.Entities;
 
 namespace AssemblyLine.DAL.Repositories
@@ -42,9 +43,18 @@ namespace AssemblyLine.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Line> EditAsync(Line entity)
+        public async Task<Line> EditAsync(Line entity)
         {
-            throw new NotImplementedException();
+            var original = await _db.Lines.FindAsync(entity.Id);
+            if (original == null)
+            {
+                throw new NotFoundException(string.Format("Could not found object with id {0}", entity.Id));
+            }
+
+            _db.Entry(original).CurrentValues.SetValues(entity);
+            await SaveChangesAsync();
+
+            return original;
         }
 
         public Task DeleteAsync(int id)

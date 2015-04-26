@@ -51,6 +51,9 @@ namespace AssemblyLine
             container.RegisterType<IEmployeeRepository, EmployeeRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IVehicleRepository, VehicleRepository>(new PerRequestLifetimeManager());
             container.RegisterType<ILineRepository, LineRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IProjectRepository, ProjectRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IProjectLinesRepository, ProjectLinesRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IAssemblyLineTeamRepository, AssemblyLineTeamRepository>(new PerRequestLifetimeManager());
 
             // BLL
 

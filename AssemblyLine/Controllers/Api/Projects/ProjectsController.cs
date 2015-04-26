@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,7 +11,7 @@ using AssemblyLine.DAL.Entities;
 using AssemblyLine.DAL.Repositories;
 using AssemblyLine.Infrastructure.Filters.Api;
 
-namespace AssemblyLine.Controllers.Api
+namespace AssemblyLine.Controllers.Api.Projects
 {
     [ValidationHttp]
     [Route("api/projects/{id:int?}", Name = RouteNames.ProjectsApi)]
@@ -26,7 +27,7 @@ namespace AssemblyLine.Controllers.Api
         [EnableQuery]
         public IQueryable<Project> Get()
         {
-            IQueryable<Project> entities = _repository.AsQueryable();
+            IQueryable<Project> entities = _repository.AsQueryable().Include(p => p.Vehicle);
             return entities;
         }
 

@@ -45,6 +45,8 @@
                 },
                 query: function(filter) {
 
+                    filter = filter || {};
+
                     // OData params
                     var params = {};
 
@@ -262,6 +264,8 @@
                 },
                 query: function (filter) {
 
+                    filter = filter || {};
+
                     // OData params
                     var params = {};
 
@@ -271,6 +275,72 @@
                     if (filter.name) {
                         filterParts.push("substringof('" + filter.name + "',Name)");
                     }
+                    if (filterParts.length > 0) {
+                        filterExpr = filterParts.join(' and ');
+                    }
+                    if (filterExpr) {
+                        params['$filter'] = filterExpr;
+                    }
+
+                    if (filter.orderBy) {
+                        var order = filter.orderByDesc ? 'desc' : 'asc';
+                        params['$orderby'] = filter.orderBy + ' ' + order;
+                    }
+
+                    if (filter.skip) {
+                        params['$skip'] = filter.skip;
+                    }
+
+                    if (filter.take) {
+                        params['$top'] = filter.take;
+                    }
+
+                    var deferred = $q.defer();
+
+                    resource.query(params, function (data) {
+                        deferred.resolve(data);
+                    }, function () {
+                        deferred.reject();
+                    });
+
+                    return deferred.promise;
+                }
+            };
+        }
+    ]);
+
+    module.factory('projectLineService', [
+        '$resource', '$q', function ($resource, $q) {
+
+            var resource = $resource('/api/projects/:pid/lines/:id',
+            { pid: '@pid', id: '@id' },
+            {
+                update: { method: 'PUT' }
+            });
+
+
+            return {
+                get: function (pid, id) {
+                    var deferred = $q.defer();
+
+                    resource.get({ pid: pid, id: id }, function (data) {
+                        deferred.resolve(data);
+                    }, function () {
+                        deferred.reject();
+                    });
+
+                    return deferred.promise;
+                },
+                query: function (pid, filter) {
+
+                    filter = filter || {};
+
+                    // OData params
+                    var params = { pid: pid };
+
+                    var filterExpr = null;
+                    var filterParts = [];
+
                     if (filterParts.length > 0) {
                         filterExpr = filterParts.join(' and ');
                     }

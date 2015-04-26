@@ -15,9 +15,13 @@ namespace AssemblyLine.DAL
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        public DbSet<Entities.Line> Lines { get; set; }
+        public DbSet<Line> Lines { get; set; }
 
         public DbSet<Project> Projects { get; set; }
+
+        public DbSet<AssemblyLineTeam> AssemblyLineTeams { get; set; }
+
+        public DbSet<ProjectAssemblyLine> ProjectLines { get; set; }
 
 
         public static ApplicationDbContext Create()
