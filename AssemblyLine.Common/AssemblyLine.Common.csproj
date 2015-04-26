@@ -46,13 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audit\AuditModel.cs" />
+    <Compile Include="Audit\TraceAuditService.cs" />
+    <Compile Include="Audit\IAuditService.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Constants\ServiceBusSubscriptions.cs" />
     <Compile Include="Constants\ServiceBusTopics.cs" />
+    <Compile Include="Email\EmailModel.cs" />
+    <Compile Include="Email\TraceMailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IMailService.cs" />
-    <Compile Include="Services\SendgridMailService.cs" />
+    <Compile Include="Email\IMailService.cs" />
+    <Compile Include="Email\SendgridMailService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
