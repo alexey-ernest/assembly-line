@@ -1,17 +1,43 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    background: #eaeaea;
+    text-align: center;
 }
 
-/* Set padding to keep content from hitting the edges */
+a,
+a:link,
+a:visited,
+a:hover,
+a:target {
+    color: #0d80dc;
+    text-decoration: none;
+}
+
+
+.brand {
+    height: 40px;
+    background: url(images/brand.png) no-repeat center center;
+    -ms-background-size: contain;
+    background-size: contain;
+    margin: 50px auto;
+    text-indent: -1000em;
+}
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.footer {
+    font-size: 11px;
+    color: #a9a9a9;
+    border-top: 1px solid #dddddd;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* Bootstrap Overridden */
+
+h1, .h1 {
+    color: #129e5e;
 }
