@@ -4,6 +4,7 @@ using AssemblyLine.Common.Initializers;
 using AssemblyLine.Common.Logging;
 using AssemblyLine.Configuration;
 using AssemblyLine.DAL;
+using AssemblyLine.DAL.Repositories;
 using Microsoft.Practices.Unity;
 
 namespace AssemblyLine
@@ -46,6 +47,8 @@ namespace AssemblyLine
 
             // DAL
             container.RegisterType<ApplicationDbContext, ApplicationDbContext>(new PerRequestLifetimeManager());
+            container.RegisterType<IUserRepository, UserRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IEmployeeRepository, EmployeeRepository>(new PerRequestLifetimeManager());
 
             // BLL
 

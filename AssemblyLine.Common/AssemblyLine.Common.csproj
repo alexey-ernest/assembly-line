@@ -59,6 +59,13 @@
     <Compile Include="Audit\IAuditService.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
+    <Compile Include="Exceptions\AssemblyLineException.cs" />
+    <Compile Include="Exceptions\BadRequestException.cs" />
+    <Compile Include="Exceptions\UnauthorizedException.cs" />
+    <Compile Include="Exceptions\ConflictException.cs" />
+    <Compile Include="Exceptions\BadGatewayException.cs" />
+    <Compile Include="Exceptions\ForbiddenException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Initializers\IInitializable.cs" />
     <Compile Include="Constants\ServiceBusSubscriptions.cs" />
     <Compile Include="Constants\ServiceBusTopics.cs" />

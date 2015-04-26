@@ -6,8 +6,8 @@ namespace AssemblyLine.DAL.Entities
     {
         public int Id { get; set; }
 
-        public virtual User Manager { get; set; }
+        public virtual Employee Manager { get; set; }
 
-        public virtual ICollection<User> Engineers { get; set; }
+        public virtual ICollection<Employee> Engineers { get; set; }
     }
 }

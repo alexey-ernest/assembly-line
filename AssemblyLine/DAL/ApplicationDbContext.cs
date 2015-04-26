@@ -1,4 +1,5 @@
-﻿using AssemblyLine.DAL.Entities;
+﻿using System.Data.Entity;
+using AssemblyLine.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AssemblyLine.DAL
@@ -9,6 +10,9 @@ namespace AssemblyLine.DAL
             : base("DefaultConnection", false)
         {
         }
+
+        public DbSet<Employee> Employees { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

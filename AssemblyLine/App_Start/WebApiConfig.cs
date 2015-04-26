@@ -1,4 +1,6 @@
 ﻿using System.Web.Http;
+using AssemblyLine.Infrastructure.Filters;
+using AssemblyLine.Infrastructure.Filters.Api;
 using Microsoft.Owin.Security.OAuth;
 
 namespace AssemblyLine
@@ -15,8 +17,8 @@ namespace AssemblyLine
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional}
-                );
+            // Exception logging in api controllers
+            config.Filters.Add((HttpExceptionHandlingAttribute)config.DependencyResolver.GetService(typeof(HttpExceptionHandlingAttribute)));
         }
     }
 }
