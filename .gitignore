@@ -111,3 +111,6 @@ UpgradeLog*.XML
 *.azurePubxml
 
 *.DotSettings
+
+# App_Data
+AssemblyLine/App_Data/

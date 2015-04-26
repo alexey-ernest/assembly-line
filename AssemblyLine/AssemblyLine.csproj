@@ -290,6 +290,10 @@
     <Compile Include="Migrations\201504260927210_AddEmployeeeCreated.Designer.cs">
       <DependentUpon>201504260927210_AddEmployeeeCreated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504261003221_RequiredEmployeeFields.cs" />
+    <Compile Include="Migrations\201504261003221_RequiredEmployeeFields.Designer.cs">
+      <DependentUpon>201504261003221_RequiredEmployeeFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -378,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504260927210_AddEmployeeeCreated.resx">
       <DependentUpon>201504260927210_AddEmployeeeCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261003221_RequiredEmployeeFields.resx">
+      <DependentUpon>201504261003221_RequiredEmployeeFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
