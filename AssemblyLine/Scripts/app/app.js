@@ -8,7 +8,8 @@
         'infinite-scroll',
         'assemblyLine.home',
         'assemblyLine.projects',
-        'assemblyLine.employees'
+        'assemblyLine.employees',
+        'assemblyLine.vehicles'
     ]);
 
     // Third party libraries
@@ -37,7 +38,7 @@
     // Main application controller
     module.controller('AppCtrl', [
         '$rootScope', '$state',
-        function ($rootScope, $state) {
+        function ($rootScope) {
 
             // GlOBAL SCOPE PROPERTIES
             $rootScope.fromState = null;

@@ -29,7 +29,7 @@ namespace AssemblyLine.DAL.Repositories
 
         public IQueryable<Vehicle> AsQueryable()
         {
-            throw new NotImplementedException();
+            return _db.Vehicles;
         }
 
         public Task<Vehicle> GetAsync(int id)

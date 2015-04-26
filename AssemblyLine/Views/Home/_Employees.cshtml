@@ -3,14 +3,14 @@
 
     <h1>Employees <a class="btn btn-default" ui-sref="^.employeecreate"><i class="glyphicon glyphicon-plus"></i></a></h1>
     <div class="list-group" infinite-scroll="nextPage()">
-        <a href="" ng-repeat="e in employees" ui-sref="^.employeedetails({id: e.id})" class="list-group-item">
-            {{e.firstName}} {{e.lastName}} <small><i>{{e.post}}</i></small>
+        <a href="" ng-repeat="i in items" ui-sref="^.employeedetails({id: i.id})" class="list-group-item">
+            {{i.firstName}} {{i.lastName}} <small><i>{{i.post}}</i></small>
         </a>
     </div>
 
     <div loader loader-if="isLoading"></div>
 
-    <p ng-if="employees.length == 0 && !isLoading"><i>There are no employees.</i></p>
+    <p ng-if="items.length == 0 && !isLoading"><i>There are no employees.</i></p>
 
 </script>
 

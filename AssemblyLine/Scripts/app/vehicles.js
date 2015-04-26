@@ -1,7 +1,7 @@
 ﻿(function (window, angular) {
     'use strict';
 
-    var module = angular.module('assemblyLine.employees', [
+    var module = angular.module('assemblyLine.vehicles', [
         'constants',
         'ui.router',
         'services'
@@ -11,30 +11,30 @@
     module.config([
         '$stateProvider', 'userRoles', function ($stateProvider, userRoles) {
             $stateProvider
-                .state('app.employees', {
-                    url: '/employees',
-                    templateUrl: 'employees.html',
-                    controller: 'EmployeesCtrl',
+                .state('app.vehicles', {
+                    url: '/vehicles',
+                    templateUrl: 'vehicles.html',
+                    controller: 'VehiclesCtrl',
                     data: {
-                        pageTitle: 'Employees at Melnikov Assembly Line Application',
+                        pageTitle: 'Vehicles at Melnikov Assembly Line Application',
                         roles: [userRoles.all]
                     }
                 })
-                .state('app.employeedetails', {
-                    url: '/employees/{id:int}',
-                    templateUrl: 'employees.details.html',
-                    controller: 'EmployeeDetailsCtrl',
+                .state('app.vehicledetails', {
+                    url: '/vehicles/{id:int}',
+                    templateUrl: 'vehicles.details.html',
+                    controller: 'VehicleDetailsCtrl',
                     data: {
-                        pageTitle: 'Employee Details at Melnikov Assembly Line Application',
+                        pageTitle: 'Vehicle Details at Melnikov Assembly Line Application',
                         roles: [userRoles.all]
                     }
                 })
-                .state('app.employeecreate', {
-                    url: '/employees/new',
-                    templateUrl: 'employees.create.html',
-                    controller: 'EmployeeCreateCtrl',
+                .state('app.vehiclecreate', {
+                    url: '/vehicles/new',
+                    templateUrl: 'vehicles.create.html',
+                    controller: 'VehicleCreateCtrl',
                     data: {
-                        pageTitle: 'New Employee at Melnikov Assembly Line Application',
+                        pageTitle: 'New Vehicle at Melnikov Assembly Line Application',
                         roles: [userRoles.all]
                     }
                 });
@@ -42,14 +42,14 @@
     ]);
 
     // Controllers
-    module.controller('EmployeesCtrl', [
-        '$scope', '$state', 'employeeService',
-        function ($scope, $state, employeeService) {
+    module.controller('VehiclesCtrl', [
+        '$scope', '$state', 'vehicleService',
+        function ($scope, $state, vehicleService) {
 
             // PROPERTIES
             $scope.items = [];
             $scope.filter = {
-                orderBy: 'Created',
+                orderBy: 'Id',
                 orderByDesc: true,
                 skip: 0,
                 take: 20
@@ -73,7 +73,7 @@
             function filterItems() {
 
                 $scope.isLoading = true;
-                return employeeService.query($scope.filter)
+                return vehicleService.query($scope.filter)
                     .then(function (data) {
                         if (data.length < $scope.filter.take) {
                             $scope.isAllLoaded = true;
@@ -89,6 +89,7 @@
                         $scope.isLoading = false;
                     }, function() {
                         $scope.isLoading = false;
+                        throw new Error();
                     });
             };
 
@@ -102,9 +103,9 @@
         }
     ]);
 
-    module.controller('EmployeeDetailsCtrl', [
-        '$scope', '$state', 'employeeService', '$stateParams',
-        function ($scope, $state, employeeService, $stateParams) {
+    module.controller('VehicleDetailsCtrl', [
+        '$scope', '$state', 'vehicleService', '$stateParams',
+        function ($scope, $state, vehicleService, $stateParams) {
 
             $scope.item = null;
             $scope.isLoading = false;
@@ -126,7 +127,7 @@
             
             $scope.delete = function (item) {
                 item.$delete().then(function () {
-                    $state.go('^.employees');
+                    $state.go('^.vehicles');
                 }, function (reason) {
                     throw new Error(reason);
                 });
@@ -134,7 +135,7 @@
 
             function load(id) {
                 $scope.isLoading = true;
-                employeeService.get(id).then(function(data) {
+                vehicleService.get(id).then(function(data) {
                     $scope.item = data;
                     $scope.isLoading = false;
                 }, function() {
@@ -146,11 +147,11 @@
         }
     ]);
 
-    module.controller('EmployeeCreateCtrl', [
-        '$scope', '$state', 'employeeService',
-        function ($scope, $state, employeeService) {
+    module.controller('VehicleCreateCtrl', [
+        '$scope', '$state', 'vehicleService',
+        function ($scope, $state, vehicleService) {
 
-            $scope.item = employeeService.create({ firstName: null, lastName: null });
+            $scope.item = vehicleService.create({ firstName: null, lastName: null });
             $scope.isLoading = false;
 
             $scope.create = function (form, item) {
@@ -161,7 +162,7 @@
                 item.$isLoading = true;
                 item.$save().then(function () {
                     item.$isLoading = false;
-                    $state.go('^.employees');
+                    $state.go('^.vehicles');
                 }, function (reason) {
                     item.$isLoading = false;
                     throw new Error(reason);
