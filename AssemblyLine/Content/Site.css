@@ -32,6 +32,10 @@
     }
 }
 
+.field-validation-error {
+    color: #ff1493
+}
+
 /* Bootstrap Overridden */
 
 h1, .h1 {

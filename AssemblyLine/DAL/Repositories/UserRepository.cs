@@ -34,6 +34,8 @@ namespace AssemblyLine.DAL.Repositories
 
         public IQueryable<User> GetUsersInRole(string roleName)
         {
+            // todo: WindowsTokenRoleProvider
+
             IdentityRole role = _db.Roles.FirstOrDefault(r => r.Name == roleName);
             if (role == null)
             {

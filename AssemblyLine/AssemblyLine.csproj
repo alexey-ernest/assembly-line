@@ -268,7 +268,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1099,6 +1099,7 @@
     <Content Include="Views\Home\_Home.cshtml" />
     <Content Include="Views\Home\_Projects.cshtml" />
     <Content Include="Views\Home\_Employees.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

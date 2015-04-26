@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using AssemblyLine.Configuration;
 
 namespace AssemblyLine.Controllers
 {
-	public class HomeController : Controller
-	{
-		public ActionResult Index()
-		{
-			ViewBag.Title = "Home Page";
-
-			return View();
-		}
-	}
+    public class HomeController : Controller
+    {
+        [Route("/", Name = RouteNames.HomeMvc)]
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
 }
