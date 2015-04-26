@@ -19,6 +19,24 @@
                         pageTitle: 'Employees at Melnikov Assembly Line Application',
                         roles: [userRoles.all]
                     }
+                })
+                .state('app.employeedetails', {
+                    url: '/employees/{id:int}',
+                    templateUrl: 'employees.details.html',
+                    controller: 'EmployeeDetailsCtrl',
+                    data: {
+                        pageTitle: 'Employee Details at Melnikov Assembly Line Application',
+                        roles: [userRoles.all]
+                    }
+                })
+                .state('app.employeecreate', {
+                    url: '/employees/new',
+                    templateUrl: 'employees.create.html',
+                    controller: 'EmployeeCreateCtrl',
+                    data: {
+                        pageTitle: 'New Employee at Melnikov Assembly Line Application',
+                        roles: [userRoles.all]
+                    }
                 });
         }
     ]);
@@ -30,11 +48,11 @@
 
             // PROPERTIES
             $scope.employees = [];
-            $scope.employeesFilter = {
+            $scope.filter = {
                 orderBy: 'Created',
                 orderByDesc: true,
                 skip: 0,
-                take: 15
+                take: 20
             };
 
             $scope.isLoading = false;
@@ -55,9 +73,15 @@
             function filterItems() {
 
                 $scope.isLoading = true;
-                return employeeService.query($scope.employeesFilter)
+                return employeeService.query($scope.filter)
                     .then(function (data) {
-                        if (!$scope.employeesFilter.skip) {
+                        if (data.length < $scope.filter.take) {
+                            $scope.isAllLoaded = true;
+                        } else {
+                            $scope.isAllLoaded = false;
+                        }
+
+                        if (!$scope.filter.skip) {
                             $scope.employees = [];
                         }
                         $scope.employees = $scope.employees.concat(data);
@@ -75,6 +99,75 @@
 
             // INIT
             load();
+        }
+    ]);
+
+    module.controller('EmployeeDetailsCtrl', [
+        '$scope', '$state', 'employeeService', '$stateParams',
+        function ($scope, $state, employeeService, $stateParams) {
+
+            $scope.item = null;
+            $scope.isLoading = false;
+
+            $scope.update = function (form, item) {
+                if (form.$invalid) {
+                    return;
+                }
+
+                item.$isLoading = true;
+                item.$update().then(function () {
+                    item.$isLoading = false;
+                }, function (reason) {
+                    item.$isLoading = false;
+                    throw new Error(reason);
+                });
+
+            };
+            
+            $scope.delete = function (item) {
+                item.$delete().then(function () {
+                    $state.go('^.employees');
+                }, function (reason) {
+                    throw new Error(reason);
+                });
+            }
+
+            function load(id) {
+                $scope.isLoading = true;
+                employeeService.get(id).then(function(data) {
+                    $scope.item = data;
+                    $scope.isLoading = false;
+                }, function() {
+                    $scope.isLoading = false;
+                });
+            }
+
+            load($stateParams.id);
+        }
+    ]);
+
+    module.controller('EmployeeCreateCtrl', [
+        '$scope', '$state', 'employeeService',
+        function ($scope, $state, employeeService) {
+
+            $scope.item = employeeService.create({ firstName: null, lastName: null });
+            $scope.isLoading = false;
+
+            $scope.create = function (form, item) {
+                if (form.$invalid) {
+                    return;
+                }
+
+                item.$isLoading = true;
+                item.$save().then(function () {
+                    item.$isLoading = false;
+                    $state.go('^.employees');
+                }, function (reason) {
+                    item.$isLoading = false;
+                    throw new Error(reason);
+                });
+
+            };
         }
     ]);
 

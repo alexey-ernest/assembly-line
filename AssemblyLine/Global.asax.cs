@@ -12,6 +12,7 @@ namespace AssemblyLine
         {
             var container = IoCConfig.GetConfiguredContainer();
             InitializersConfig.Register(container);
+            JsonConfig.Configure(GlobalConfiguration.Configuration);
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

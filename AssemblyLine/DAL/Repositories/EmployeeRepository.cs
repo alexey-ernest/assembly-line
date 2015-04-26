@@ -36,14 +36,15 @@ namespace AssemblyLine.DAL.Repositories
             return await _db.Employees.FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public Task<Employee> AddAsync(Employee entity)
+        public async Task<Employee> AddAsync(Employee entity)
         {
             // setting default properties
             entity.Created = DateTime.UtcNow;
 
-            _db.Employees.Add(entity);
+            entity = _db.Employees.Add(entity);
+            await SaveChangesAsync();
 
-            return Task.FromResult(entity);
+            return entity;
         }
 
         public async Task<Employee> EditAsync(Employee entity)
@@ -58,6 +59,7 @@ namespace AssemblyLine.DAL.Repositories
             entity.Created = original.Created;
 
             _db.Entry(original).CurrentValues.SetValues(entity);
+            await SaveChangesAsync();
 
             return original;
         }
@@ -71,6 +73,7 @@ namespace AssemblyLine.DAL.Repositories
             }
 
             _db.Employees.Remove(entity);
+            await SaveChangesAsync();
         }
     }
 }

@@ -32,6 +32,11 @@ namespace AssemblyLine.DAL.Repositories
             return _db.Users;
         }
 
+        public Task<User> GetAsync(string id)
+        {
+            return _db.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public IQueryable<User> GetUsersInRole(string roleName)
         {
             // todo: WindowsTokenRoleProvider

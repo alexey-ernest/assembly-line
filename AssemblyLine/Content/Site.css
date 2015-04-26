@@ -36,8 +36,15 @@
     color: #ff1493
 }
 
+.wrapper-loading {
+    padding: 20px 0 20px;
+	clear: both;
+}
+
 /* Bootstrap Overridden */
 
 h1, .h1 {
     color: #129e5e;
+    margin-top: 0;
+    margin-bottom: 30px;
 }

@@ -43,7 +43,7 @@ namespace AssemblyLine.Controllers
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
-            FormsAuthentication.RedirectToLoginPage();
+            return RedirectToRoute(RouteNames.HomeMvc);
         }
     }
 }

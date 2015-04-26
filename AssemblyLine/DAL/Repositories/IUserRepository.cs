@@ -8,6 +8,8 @@ namespace AssemblyLine.DAL.Repositories
     {
         IQueryable<User> AsQueryable();
 
+        Task<User> GetAsync(string id);
+
         IQueryable<User> GetUsersInRole(string roleName);
 
         Task<string[]> GetUserRolesAsync(string id);

@@ -15,8 +15,8 @@
 
 
             return {
-                create: function() {
-                    return new resource({});
+                create: function(options) {
+                    return new resource({ firstName: options.firstName, lastName: options.lastName });
                 },
                 get: function (id) {
                     var deferred = $q.defer();

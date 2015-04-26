@@ -3,7 +3,9 @@
 
     var module = angular.module('assemblyLine', [
         'constants',
+        'directives',
         'ui.router',
+        'infinite-scroll',
         'assemblyLine.home',
         'assemblyLine.projects',
         'assemblyLine.employees'
@@ -34,8 +36,8 @@
 
     // Main application controller
     module.controller('AppCtrl', [
-        '$rootScope', '$state', '$timeout',
-        function ($rootScope, $state, $timeout) {
+        '$rootScope', '$state',
+        function ($rootScope, $state) {
 
             // GlOBAL SCOPE PROPERTIES
             $rootScope.fromState = null;
@@ -50,11 +52,6 @@
                 // maintaining state transition data
                 $rootScope.fromState = from.name;
                 $rootScope.fromStateParams = fromParams;
-            });
-
-
-            $timeout(function() {
-                $state.go('app.home');
             });
 
         }

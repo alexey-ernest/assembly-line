@@ -212,6 +212,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\InitializersConfig.cs" />
+    <Compile Include="App_Start\JsonConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\IoCConfig.cs" />
@@ -222,6 +223,8 @@
     <Compile Include="Configuration\SettingNames.cs" />
     <Compile Include="Constants\UserRoles.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\Api\VehiclesController.cs" />
     <Compile Include="Controllers\Api\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
@@ -242,7 +245,9 @@
     <Compile Include="DAL\Entities\ProjectStatus.cs" />
     <Compile Include="DAL\Entities\ProjectTeam.cs" />
     <Compile Include="DAL\Entities\Vehicle.cs" />
+    <Compile Include="DAL\Repositories\VehicleRepository.cs" />
     <Compile Include="DAL\Repositories\EmployeeRepository.cs" />
+    <Compile Include="DAL\Repositories\IVehicleRepository.cs" />
     <Compile Include="DAL\Repositories\IEmployeeRepository.cs" />
     <Compile Include="DAL\Repositories\IRepository.cs" />
     <Compile Include="DAL\Repositories\IUserRepository.cs" />
@@ -265,6 +270,10 @@
     <Compile Include="Migrations\201504261003221_RequiredEmployeeFields.cs" />
     <Compile Include="Migrations\201504261003221_RequiredEmployeeFields.Designer.cs">
       <DependentUpon>201504261003221_RequiredEmployeeFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261339048_Vehicles.cs" />
+    <Compile Include="Migrations\201504261339048_Vehicles.Designer.cs">
+      <DependentUpon>201504261339048_Vehicles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -309,6 +318,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\constants.js" />
+    <Content Include="Scripts\app\directives.js" />
     <Content Include="Scripts\app\projects.js" />
     <Content Include="Scripts\app\employees.js" />
     <Content Include="Scripts\app\home.js" />
@@ -1078,6 +1088,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ng-infinite-scroll.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
@@ -1126,6 +1137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504261003221_RequiredEmployeeFields.resx">
       <DependentUpon>201504261003221_RequiredEmployeeFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261339048_Vehicles.resx">
+      <DependentUpon>201504261339048_Vehicles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

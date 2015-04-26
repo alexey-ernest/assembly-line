@@ -3,9 +3,13 @@ using AssemblyLine.Configuration;
 
 namespace AssemblyLine.Controllers
 {
+    [RoutePrefix("")]
     public class HomeController : Controller
     {
-        [Route("/", Name = RouteNames.HomeMvc)]
+        [Route("employees/{id?}")]
+        [Route("vehicles/{id?}")]
+        [Route("projects/{id?}")]
+        [Route(Name = RouteNames.HomeMvc)]
         public ActionResult Index()
         {
             return View();

@@ -49,6 +49,10 @@ namespace AssemblyLine.Infrastructure.Filters.Api
             {
                 context.Response = new HttpResponseMessage(HttpStatusCode.Conflict);
             }
+            else if (exception is NotImplementedException)
+            {
+                context.Response = new HttpResponseMessage(HttpStatusCode.NotImplemented);
+            }
             else if (exception is BadGatewayException)
             {
                 // 502

@@ -13,6 +13,8 @@ namespace AssemblyLine.DAL
 
         public DbSet<Employee> Employees { get; set; }
 
+        public DbSet<Vehicle> Vehicles { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

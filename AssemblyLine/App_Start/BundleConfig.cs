@@ -21,6 +21,7 @@ namespace AssemblyLine
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/angular.js",
+                "~/Scripts/ng-infinite-scroll.js",
                 "~/Scripts/angular-resource.js",
                 "~/Scripts/angular-ui-router.js",
                 "~/Scripts/app/*.js"));
