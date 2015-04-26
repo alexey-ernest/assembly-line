@@ -29,7 +29,7 @@
         '$stateProvider', function ($stateProvider) {
             $stateProvider
                 .state('app', {
-                    "abstract": true,
+                    'abstract': true,
                     template: '<div ui-view></div>'
                 });
         }

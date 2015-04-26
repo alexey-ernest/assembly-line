@@ -8,6 +8,7 @@
         // API
         public const string UsersApi = "UsersApi";
         public const string EmployeeApi = "EmployeeApi";
+        public const string ProjectsApi = "ProjectsApi";
         public const string VehiclesApi = "VehiclesApi";
     }
 }

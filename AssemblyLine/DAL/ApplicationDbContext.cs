@@ -15,6 +15,8 @@ namespace AssemblyLine.DAL
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
+        public DbSet<Project> Projects { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

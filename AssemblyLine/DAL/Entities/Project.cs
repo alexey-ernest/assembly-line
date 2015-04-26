@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace AssemblyLine.DAL.Entities
 {
@@ -7,12 +9,15 @@ namespace AssemblyLine.DAL.Entities
     {
         public int Id { get; set; }
 
+        [Required]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         public virtual Vehicle Vehicle { get; set; }
 
         public int? VehicleNumber { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<ProjectAssemblyLine> AssemblyLines { get; set; }
 
         public DateTime Created { get; set; }
@@ -23,19 +28,24 @@ namespace AssemblyLine.DAL.Entities
 
         public ProjectStatus Status { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<ProductionCycle> Cycles { get; set; }
 
         public virtual ProductionCycle Cycle { get; set; }
 
 
-        #region delivery info
+        #region delivery parameters
 
+        [Display(Name = "Delivery Address")]
         public string DeliveryAddress { get; set; }
 
+        [Display(Name = "Delivery Phone")]
         public string DeliveryPhone { get; set; }
 
+        [Display(Name = "Contact Person")]
         public string DeliveryContactPerson { get; set; }
 
+        [Display(Name = "Delivery Date")]
         public DateTime DeliveryDate { get; set; }
 
         #endregion

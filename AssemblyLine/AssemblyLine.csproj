@@ -223,6 +223,7 @@
     <Compile Include="Configuration\SettingNames.cs" />
     <Compile Include="Constants\UserRoles.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\ProjectsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\VehiclesController.cs" />
     <Compile Include="Controllers\Api\EmployeesController.cs" />
@@ -245,6 +246,8 @@
     <Compile Include="DAL\Entities\ProjectStatus.cs" />
     <Compile Include="DAL\Entities\ProjectTeam.cs" />
     <Compile Include="DAL\Entities\Vehicle.cs" />
+    <Compile Include="DAL\Repositories\IProjectRepository.cs" />
+    <Compile Include="DAL\Repositories\ProjectRepository.cs" />
     <Compile Include="DAL\Repositories\VehicleRepository.cs" />
     <Compile Include="DAL\Repositories\EmployeeRepository.cs" />
     <Compile Include="DAL\Repositories\IVehicleRepository.cs" />
@@ -319,8 +322,8 @@
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\constants.js" />
     <Content Include="Scripts\app\directives.js" />
-    <Content Include="Scripts\app\vehicles.js" />
     <Content Include="Scripts\app\projects.js" />
+    <Content Include="Scripts\app\vehicles.js" />
     <Content Include="Scripts\app\employees.js" />
     <Content Include="Scripts\app\home.js" />
     <Content Include="Scripts\app\services.js" />

@@ -13,24 +13,24 @@ using AssemblyLine.Infrastructure.Filters.Api;
 namespace AssemblyLine.Controllers.Api
 {
     [ValidationHttp]
-    [Route("api/employees/{id:int?}", Name = RouteNames.EmployeeApi)]
-    public class EmployeesController : ApiController
+    [Route("api/projects/{id:int?}", Name = RouteNames.ProjectsApi)]
+    public class ProjectsController : ApiController
     {
-        private readonly IEmployeeRepository _repository;
+        private readonly IProjectRepository _repository;
 
-        public EmployeesController(IEmployeeRepository repository)
+        public ProjectsController(IProjectRepository repository)
         {
             _repository = repository;
         }
 
         [EnableQuery]
-        public IQueryable<Employee> Get()
+        public IQueryable<Project> Get()
         {
-            IQueryable<Employee> entities = _repository.AsQueryable();
+            IQueryable<Project> entities = _repository.AsQueryable();
             return entities;
         }
 
-        public async Task<Employee> Get(int id)
+        public async Task<Project> Get(int id)
         {
             var entity = await _repository.GetAsync(id);
             if (entity == null)
@@ -41,7 +41,7 @@ namespace AssemblyLine.Controllers.Api
             return entity;
         }
 
-        public async Task<HttpResponseMessage> Post(Employee model)
+        public async Task<HttpResponseMessage> Post(Project model)
         {
             if (model == null)
             {
@@ -51,12 +51,12 @@ namespace AssemblyLine.Controllers.Api
             model = await _repository.AddAsync(model);
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, model);
-            string uri = Url.Link(RouteNames.EmployeeApi, new { id = model.Id });
+            string uri = Url.Link(RouteNames.ProjectsApi, new { id = model.Id });
             response.Headers.Location = new Uri(uri);
             return response;
         }
 
-        public async Task<HttpResponseMessage> Put(int id, Employee model)
+        public async Task<HttpResponseMessage> Put(int id, Project model)
         {
             if (model == null)
             {

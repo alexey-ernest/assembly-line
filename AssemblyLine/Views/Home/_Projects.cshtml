@@ -1,5 +1,143 @@
-﻿<script type="text/ng-template" id="projects.html">
-    
-    <h1>Projects</h1>
+﻿@using AssemblyLine.DAL.Entities
+<script type="text/ng-template" id="projects.html">
+
+    <h1>Projects <a class="btn btn-default" ui-sref="^.projectcreate.step1"><i class="glyphicon glyphicon-plus"></i></a></h1>
+    <div class="list-group" infinite-scroll="nextPage()">
+        <a href="" ng-repeat="i in items" ui-sref="^.projectdetails({id: i.id})" class="list-group-item">
+            {{i.name}} <small><i>{{i.created}}</i></small>
+        </a>
+    </div>
+
+    <div loader loader-if="isLoading"></div>
+
+    <p ng-if="items.length == 0 && !isLoading"><i>There are no projects yet.</i></p>
+
+</script>
+
+<script type="text/ng-template" id="projects.details.html">
+
+    <h1>Project Details</h1>
+
+    <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="update(itemForm, item)">
+
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().Name)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
+            </div>
+        </div>
+        
+        <p>&nbsp;</p>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <h4>Delivery Parameters</h4>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="deliveryAddress" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryAddress)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.deliveryAddress" ng-required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="deliveryContactPerson" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryContactPerson)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="deliveryContactPerson" placeholder="" ng-model="item.deliveryContactPerson" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="deliveryPhone" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryPhone)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="deliveryPhone" placeholder="" ng-model="item.deliveryPhone" />
+            </div>
+        </div>
+
+        <p>&nbsp;</p>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a class="btn btn-default" ui-sref="^.projects">&larr; Back</a>
+                <button type="submit" class="btn btn-primary" ng-disabled="itemForm.$invalid || item.$isLoading">
+                    <span ng-if="item.$isLoading === undefined">Save</span>
+                    <span ng-if="item.$isLoading === false"><i class="fa fa-check"></i> Saved</span>
+                    <span ng-if="item.$isLoading === true"><i class="fa fa-spinner fa-spin"></i> Saving...</span>
+                </button>
+                <a href="#" class="btn btn-default" on-confirm-click confirm-click="delete(item)">Delete</a>
+            </div>
+        </div>
+
+    </form>
+
+    <div loader loader-if="!item && isLoading"></div>
+
+</script>
+
+<script type="text/ng-template" id="projects.create1.html">
+
+    <h1>New Project Step 1</h1>
+
+    <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="next(itemForm, item)">
+
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().Name)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
+            </div>
+        </div>
+        
+        <p>&nbsp;</p>
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <h4>Delivery Parameters</h4>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="deliveryAddress" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryAddress)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.deliveryAddress" ng-required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="deliveryContactPerson" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryContactPerson)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="deliveryContactPerson" placeholder="" ng-model="item.deliveryContactPerson" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="deliveryPhone" class="col-sm-2 control-label">@Html.DisplayNameFor(x => new Project().DeliveryPhone)</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="deliveryPhone" placeholder="" ng-model="item.deliveryPhone" />
+            </div>
+        </div>
+
+        <p>&nbsp;</p>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a class="btn btn-default" ui-sref="^.projects">&larr; Back</a>
+                <a class="btn btn-default" ui-sref="^.step2">Next &rarr;</a>
+            </div>
+        </div>
+
+    </form>
+
+</script>
+
+<script type="text/ng-template" id="projects.create2.html">
+
+    <h1>New Project Step 2</h1>
+
+    <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="next(itemForm, item)">
+
+        
+        <p>&nbsp;</p>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a class="btn btn-default" ui-sref="^.step1">&larr; Back</a>
+                <a class="btn btn-default" ui-sref="^.step3">Next &rarr;</a>
+            </div>
+        </div>
+
+    </form>
 
 </script>
