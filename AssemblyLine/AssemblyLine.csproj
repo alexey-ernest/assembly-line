@@ -297,6 +297,7 @@
     <Compile Include="Mappings\IMapper.cs" />
     <Compile Include="Mappings\IMapping.cs" />
     <Compile Include="Mappings\Mapper.cs" />
+    <Compile Include="Mappings\MilestoneTaskMapping.cs" />
     <Compile Include="Mappings\ProjectLineMapping.cs" />
     <Compile Include="Mappings\ProjectMapping.cs" />
     <Compile Include="Mappings\ProjectMilestoneMapping.cs" />
@@ -358,10 +359,12 @@
     <Compile Include="Models\EmployeeListModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="DAL\Entities\User.cs" />
+    <Compile Include="Models\MilestoneTaskListModel.cs" />
     <Compile Include="Models\ProjectCycleMapping.cs" />
     <Compile Include="Models\ProjectLineCycleModel.cs" />
     <Compile Include="Models\ProjectLineListModel.cs" />
     <Compile Include="Models\ProjectLineMilestoneModel.cs" />
+    <Compile Include="Models\ProjectLineMilestoneListModel.cs" />
     <Compile Include="Models\ProjectLineModel.cs" />
     <Compile Include="Models\ProjectListModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />

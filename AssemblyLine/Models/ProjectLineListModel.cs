@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AssemblyLine.Models
+﻿namespace AssemblyLine.Models
 {
     public class ProjectLineListModel
     {

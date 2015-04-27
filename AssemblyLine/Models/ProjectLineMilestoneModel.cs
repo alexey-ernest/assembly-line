@@ -1,4 +1,5 @@
-﻿using AssemblyLine.DAL.Entities;
+﻿using System.Collections.Generic;
+using AssemblyLine.DAL.Entities;
 
 namespace AssemblyLine.Models
 {
@@ -9,5 +10,7 @@ namespace AssemblyLine.Models
         public string Name { get; set; }
 
         public MilestoneStatus Status { get; set; }
+
+        public List<MilestoneTaskListModel> Tasks { get; set; }
     }
 }
