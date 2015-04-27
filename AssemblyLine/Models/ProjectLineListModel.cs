@@ -8,6 +8,6 @@ namespace AssemblyLine.Models
 
         public AssemblyLineModel Line { get; set; }
 
-        public IEnumerable<ProjectLineMilestoneModel> Milestones { get; set; }
+        public ProjectLineCycleModel Cycle { get; set; }
     }
 }

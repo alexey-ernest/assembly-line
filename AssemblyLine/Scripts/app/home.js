@@ -42,13 +42,12 @@
     ]);
 
     module.controller('HomeLinesCtrl', [
-        '$scope', '$state', 'projectService', 'projectLineService',
-        function ($scope, $state, projectService, projectLineService) {
+        '$scope', '$state', 'projectService', 'projectLineService', 'dashboardService',
+        function ($scope, $state, projectService, projectLineService, dashboardService) {
 
             $scope.projects = [];
-            $scope.lines = {};
+            $scope.isLoading = false;
 
-            $scope.milestones = [];
             $scope.milestoneStatuses = {
                 0: 'NotStarted',
                 1: 'InProgress',
@@ -56,33 +55,18 @@
                 3: 'Completed'
             };
 
-            function loadProjectLines(id) {
-                projectLineService.query(id, { orderBy: 'Line/Name' }).then(function (data) {
-                    $scope.lines[id] = data;
-                    if (!$scope.milestones.length && data.length > 0) {
-                        $scope.milestones = data[0].milestones;
-                    }
-                }, function() {
-                    throw new Error('Could not load assembly lines.');
-                });
-            }
-
-            function loadLines(projects) {
-                for (var i = 0; i < projects.length; i++) {
-                    loadProjectLines(projects[i].id);
-                }
-            }
-
-            function loadActiveProjects() {
-                projectService.query({ active: true }).then(function(data) {
+            function loadProjectStatuses() {
+                $scope.isLoading = true;
+                dashboardService.queryProjectStatuses({ active: true, orderBy: 'Created', orderByDesc: true }).then(function(data) {
                     $scope.projects = data;
-                    loadLines(data);
+                    $scope.isLoading = false;
                 }, function() {
-                    throw new Error('Could not load projects.');
+                    $scope.isLoading = false;
+                    throw new Error('Could not load project statuses.');
                 });
             }
 
-            loadActiveProjects();
+            loadProjectStatuses();
         }
     ]);
 

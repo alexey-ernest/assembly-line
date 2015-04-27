@@ -18,21 +18,23 @@
     <div ng-repeat="p in projects">
         <h2>{{p.name}}</h2>
         
-        <table class="table table-striped">
+        <table class="table table-striped" ng-if="p.assemblyLines.length">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th ng-repeat="m in milestones">{{m.name}}</th>
+                    <th ng-repeat="m in p.assemblyLines[0].cycle.milestones">{{m.name}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="l in lines[p.id]">
+                <tr ng-repeat="l in p.assemblyLines">
                     <th scope="row">{{l.line.name}}</th>
-                    <td ng-repeat="m in milestones"><i>{{milestoneStatuses[l.milestones[$index].status]}}</i></td>
+                    <td ng-repeat="m in p.assemblyLines[0].cycle.milestones"><i>{{milestoneStatuses[l.cycle.milestones[$index].status]}}</i></td>
                 </tr>
             </tbody>
         </table>
 
     </div>
+    
+    <div loader loader-if="isLoading"></div>
 
 </script>

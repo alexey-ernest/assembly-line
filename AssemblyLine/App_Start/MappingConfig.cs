@@ -1,4 +1,5 @@
 ﻿using AssemblyLine.Mappings;
+using AssemblyLine.Models;
 using Microsoft.Practices.Unity;
 using Mapper = AutoMapper.Mapper;
 
@@ -15,6 +16,7 @@ namespace AssemblyLine
             container.RegisterType<IMapping, ProjectLineMapping>("ProjectLineMapping", new ContainerControlledLifetimeManager());
             container.RegisterType<IMapping, ProjectMapping>("ProjectMapping", new ContainerControlledLifetimeManager());
             container.RegisterType<IMapping, ProjectMilestoneMapping>("ProjectMilestoneMapping", new ContainerControlledLifetimeManager());
+            container.RegisterType<IMapping, ProjectCycleMapping>("ProjectCycleMapping", new ContainerControlledLifetimeManager());
 
             var mappings = container.ResolveAll<IMapping>();
             foreach (var mapping in mappings)

@@ -399,4 +399,56 @@
         }
     ]);
 
+    module.factory('dashboardService', [
+        '$resource', '$q', function ($resource, $q) {
+
+            return {
+                queryProjectStatuses: function (filter) {
+
+                    filter = filter || {};
+
+                    // OData params
+                    var params = {};
+
+                    var filterExpr = null;
+                    var filterParts = [];
+
+                    if (filter.active) {
+                        filterParts.push("Status eq 'InProgress'");
+                    }
+                    if (filterParts.length > 0) {
+                        filterExpr = filterParts.join(' and ');
+                    }
+                    if (filterExpr) {
+                        params['$filter'] = filterExpr;
+                    }
+
+                    if (filter.orderBy) {
+                        var order = filter.orderByDesc ? 'desc' : 'asc';
+                        params['$orderby'] = filter.orderBy + ' ' + order;
+                    }
+
+                    if (filter.skip) {
+                        params['$skip'] = filter.skip;
+                    }
+
+                    if (filter.take) {
+                        params['$top'] = filter.take;
+                    }
+
+                    var deferred = $q.defer();
+
+                    var resource = $resource('/api/dashboard/projects');
+                    resource.query(params, function (data) {
+                        deferred.resolve(data);
+                    }, function () {
+                        deferred.reject();
+                    });
+
+                    return deferred.promise;
+                }
+            };
+        }
+    ]);
+
 })(window, window.angular);

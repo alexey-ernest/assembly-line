@@ -9,6 +9,9 @@ namespace AssemblyLine.Mappings
         {
             AutoMapper.Mapper.CreateMap<Project, ProjectListModel>()
                 ;
+
+            AutoMapper.Mapper.CreateMap<Project, ProjectModel>()
+                ;
         }
     }
 }
