@@ -35,9 +35,7 @@ namespace AssemblyLine.DAL.Entities
         public ProjectStatus Status { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<ProductionCycle> Cycles { get; set; }
-
-        public virtual ProductionCycle Cycle { get; set; }
+        public virtual ProjectProductionCycle Cycle { get; set; }
 
 
         #region Delivery Parameters

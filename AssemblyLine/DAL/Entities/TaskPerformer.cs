@@ -6,9 +6,11 @@ namespace AssemblyLine.DAL.Entities
     {
         public int Id { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual Employee Employee { get; set; }
 
-        public virtual MilestoneTask Task { get; set; }
+        public virtual ProjectMilestoneTask Task { get; set; }
+
+        public virtual ICollection<TaskPoint> CheckPoints { get; set; }
 
         public virtual ICollection<TaskPoint> CompletedPoints { get; set; }
     }

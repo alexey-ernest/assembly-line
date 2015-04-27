@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using AssemblyLine.DAL.Configurations;
 using AssemblyLine.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -9,6 +10,14 @@ namespace AssemblyLine.DAL
         public ApplicationDbContext()
             : base("DefaultConnection", false)
         {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new ProjectConfiguration());
+            modelBuilder.Configurations.Add(new ProjectMilestoneTaskConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Employee> Employees { get; set; }
@@ -22,6 +31,14 @@ namespace AssemblyLine.DAL
         public DbSet<AssemblyLineTeam> AssemblyLineTeams { get; set; }
 
         public DbSet<ProjectAssemblyLine> ProjectLines { get; set; }
+
+        public DbSet<ProductionCycle> ProductionCycles { get; set; }
+
+        public DbSet<CycleMilestone> CycleMilestones { get; set; }
+
+        public DbSet<MilestoneTask> MilestoneTasks { get; set; }
+
+        public DbSet<TaskPoint> TaskPoints { get; set; }
 
 
         public static ApplicationDbContext Create()

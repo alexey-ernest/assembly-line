@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AssemblyLine.DAL.Entities
@@ -20,5 +21,8 @@ namespace AssemblyLine.DAL.Entities
         public string Post { get; set; }
 
         public DateTime Created { get; set; }
+
+
+        public virtual ICollection<TaskPerformer> Tasks { get; set; }
     }
 }

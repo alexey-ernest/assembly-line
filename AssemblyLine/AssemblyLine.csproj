@@ -219,6 +219,8 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BLL\IProjectService.cs" />
+    <Compile Include="BLL\ProjectService.cs" />
     <Compile Include="Configuration\RouteNames.cs" />
     <Compile Include="Configuration\SettingNames.cs" />
     <Compile Include="Constants\UserRoles.cs" />
@@ -231,12 +233,17 @@
     <Compile Include="Controllers\Api\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
+    <Compile Include="DAL\Configurations\ProjectMilestoneTaskConfiguration.cs" />
+    <Compile Include="DAL\Configurations\ProjectConfiguration.cs" />
     <Compile Include="DAL\Entities\LineStatus.cs" />
     <Compile Include="DAL\Entities\Line.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
     <Compile Include="DAL\Entities\Meeting.cs" />
     <Compile Include="DAL\Entities\MeetingMember.cs" />
     <Compile Include="DAL\Entities\MeetingMembershipStatus.cs" />
+    <Compile Include="DAL\Entities\ProjectCycleMilestone.cs" />
+    <Compile Include="DAL\Entities\ProjectMilestoneTask.cs" />
+    <Compile Include="DAL\Entities\ProjectProductionCycle.cs" />
     <Compile Include="DAL\Entities\TaskPerformer.cs" />
     <Compile Include="DAL\Entities\TaskPoint.cs" />
     <Compile Include="DAL\Entities\TaskStatus.cs" />
@@ -252,9 +259,11 @@
     <Compile Include="DAL\Entities\Vehicle.cs" />
     <Compile Include="DAL\Repositories\AssemblyLineTeamRepository.cs" />
     <Compile Include="DAL\Repositories\IAssemblyLineTeamRepository.cs" />
+    <Compile Include="DAL\Repositories\IProductionCycleRepository.cs" />
     <Compile Include="DAL\Repositories\IProjectRepository.cs" />
     <Compile Include="DAL\Repositories\ILineRepository.cs" />
     <Compile Include="DAL\Repositories\IProjectLinesRepository.cs" />
+    <Compile Include="DAL\Repositories\ProductionCycleRepository.cs" />
     <Compile Include="DAL\Repositories\ProjectLinesRepository.cs" />
     <Compile Include="DAL\Repositories\ProjectRepository.cs" />
     <Compile Include="DAL\Repositories\LineRepository.cs" />
@@ -311,6 +320,14 @@
     <Compile Include="Migrations\201504261925248_NotRequiredProjectDeliveryDate.cs" />
     <Compile Include="Migrations\201504261925248_NotRequiredProjectDeliveryDate.Designer.cs">
       <DependentUpon>201504261925248_NotRequiredProjectDeliveryDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504262323591_ProductionCycleRefactoring.cs" />
+    <Compile Include="Migrations\201504262323591_ProductionCycleRefactoring.Designer.cs">
+      <DependentUpon>201504262323591_ProductionCycleRefactoring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504270012129_AddProductionCycle.cs" />
+    <Compile Include="Migrations\201504270012129_AddProductionCycle.Designer.cs">
+      <DependentUpon>201504270012129_AddProductionCycle.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -1200,6 +1217,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504261925248_NotRequiredProjectDeliveryDate.resx">
       <DependentUpon>201504261925248_NotRequiredProjectDeliveryDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504262323591_ProductionCycleRefactoring.resx">
+      <DependentUpon>201504262323591_ProductionCycleRefactoring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504270012129_AddProductionCycle.resx">
+      <DependentUpon>201504270012129_AddProductionCycle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
