@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,6 +9,7 @@ using AssemblyLine.Configuration;
 using AssemblyLine.DAL.Entities;
 using AssemblyLine.DAL.Repositories;
 using AssemblyLine.Infrastructure.Filters.Api;
+using AssemblyLine.Mappings;
 using AssemblyLine.Models;
 
 namespace AssemblyLine.Controllers.Api.Projects
@@ -19,19 +19,22 @@ namespace AssemblyLine.Controllers.Api.Projects
     public class ProjectLinesController : ApiController
     {
         private readonly IProjectLinesRepository _repository;
+        private readonly IMapper _mapper;
 
-        public ProjectLinesController(IProjectLinesRepository repository)
+        public ProjectLinesController(IProjectLinesRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
+        [EnableQuery]
         public async Task<IEnumerable<ProjectLineListModel>> Get(int pid)
         {
             var entities = await _repository.GetByProjectAsync(pid);
-            return entities.Select(l => new ProjectLineListModel { Id = l.Id, Line = l.Line });
+            return entities.Select(l => _mapper.Map<ProjectAssemblyLine, ProjectLineListModel>(l)).ToList();
         }
 
-        public async Task<ProjectAssemblyLine> Get(int pid, int id)
+        public async Task<ProjectLineModel> Get(int pid, int id)
         {
             var entity = await _repository.GetAsync(id);
             if (entity == null)
@@ -39,7 +42,7 @@ namespace AssemblyLine.Controllers.Api.Projects
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            return entity;
+            return _mapper.Map<ProjectAssemblyLine, ProjectLineModel>(entity);
         }
 
         public async Task<HttpResponseMessage> Put(int pid, int id, ProjectAssemblyLine model)

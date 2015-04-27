@@ -35,14 +35,18 @@ namespace AssemblyLine.DAL.Repositories
 
         public Task<List<ProjectAssemblyLine>> GetByProjectAsync(int projectId)
         {
-            return _db.ProjectLines.Where(l => l.Project.Id == projectId).ToListAsync();
+            return
+                _db.ProjectLines.Where(l => l.Project.Id == projectId)
+                    .Include(l => l.Line)
+                    .Include(l => l.Cycle.Milestones)
+                    .ToListAsync();
         }
 
         public Task<ProjectAssemblyLine> GetAsync(int id)
         {
             return
-                _db.ProjectLines.Include(l => l.Line)
-                    .Include(l => l.Project)
+                _db.ProjectLines
+                    .Include(l => l.Line)
                     .Include(l => l.ProductionTeam)
                     .Include(l => l.ProcurementTeam)
                     .FirstOrDefaultAsync(l => l.Id == id);

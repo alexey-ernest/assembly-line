@@ -10,6 +10,7 @@ namespace AssemblyLine.Controllers
         [Route("vehicles/{*url}")]
         [Route("projects/{*url}")]
         [Route("lines/{*url}")]
+        [Route("dashboard/{*url}")]
         [Route(Name = RouteNames.HomeMvc)]
         public ActionResult Index()
         {

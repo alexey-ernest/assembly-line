@@ -93,7 +93,6 @@ namespace AssemblyLine.DAL.Repositories
 
             // updating navigation properties
             original.Vehicle = entity.Vehicle != null ? await _db.Vehicles.FindAsync(entity.Vehicle.Id) : null;
-            original.Cycle = entity.Cycle;
 
             await SaveChangesAsync();
 

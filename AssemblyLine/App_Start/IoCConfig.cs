@@ -6,6 +6,7 @@ using AssemblyLine.Common.Logging;
 using AssemblyLine.Configuration;
 using AssemblyLine.DAL;
 using AssemblyLine.DAL.Repositories;
+using AssemblyLine.Mappings;
 using Microsoft.Practices.Unity;
 
 namespace AssemblyLine
@@ -61,6 +62,7 @@ namespace AssemblyLine
             container.RegisterType<IProjectService, ProjectService>(new PerRequestLifetimeManager());
 
             // Services
+            container.RegisterType<IMapper, Mapper>(new ContainerControlledLifetimeManager());
             container.RegisterType<ILogService, TraceLogService>(new ContainerControlledLifetimeManager());
 
             // Initializers

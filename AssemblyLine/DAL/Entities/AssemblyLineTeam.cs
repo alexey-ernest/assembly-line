@@ -8,7 +8,7 @@ namespace AssemblyLine.DAL.Entities
         public int Id { get; set; }
 
         [Display(Name = "Team Manager")]
-        public virtual Employee Manager { get; set; }
+        public virtual Employee Manager { get; set; }  
 
         [Display(Name = "Team Engineers")]
         public virtual ICollection<Employee> Engineers { get; set; }

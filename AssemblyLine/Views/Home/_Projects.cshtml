@@ -67,7 +67,7 @@
                     <span ng-if="item.$isLoading === false">Saved</span>
                     <span ng-if="item.$isLoading === true">Saving...</span>
                 </button>
-                <a href="#" class="btn btn-success" on-confirm-click confirm-click="start(item)">Start Production Cycle</a>
+                <a href="#" class="btn btn-success" on-confirm-click confirm-click="start(item)" ng-disabled="itemForm.$invalid || item.$isLoading || item.status > 0">Start Production Cycle</a>
             </div>
 
         </form>

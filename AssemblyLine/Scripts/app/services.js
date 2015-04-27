@@ -275,6 +275,9 @@
                     if (filter.name) {
                         filterParts.push("substringof('" + filter.name + "',Name)");
                     }
+                    if (filter.active) {
+                        filterParts.push("Status eq 'InProgress'");
+                    }
                     if (filterParts.length > 0) {
                         filterExpr = filterParts.join(' and ');
                     }

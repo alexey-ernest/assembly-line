@@ -14,7 +14,7 @@ namespace AssemblyLine.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new ProjectConfiguration());
+            modelBuilder.Configurations.Add(new ProjectAssemblyLineConfiguration());
             modelBuilder.Configurations.Add(new ProjectMilestoneTaskConfiguration());
 
             base.OnModelCreating(modelBuilder);

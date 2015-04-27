@@ -28,6 +28,8 @@ namespace AssemblyLine.BLL
                 throw new NotFoundException(string.Format("Could not find project with id: {0}.", id));
             }
 
+            // todo: check project status
+
             var cycle = await _productionCycleRepository.GetAsync();
             if (cycle == null)
             {
@@ -40,49 +42,51 @@ namespace AssemblyLine.BLL
             }
 
             // Copying cycle into the project
-            var projectCycle = new ProjectProductionCycle
+            foreach (var line in project.AssemblyLines)
             {
-                Milestones = new List<ProjectCycleMilestone>()
-            };
-
-            project.Cycle = projectCycle;
-            project = await _projectRepository.EditAsync(project);
-
-            foreach (var milestone in cycle.Milestones)
-            {
-                var projectMilestone = new ProjectCycleMilestone
+                var projectCycle = new ProjectProductionCycle
                 {
-                    Status = MilestoneStatus.NotStarted,
-                    Name = milestone.Name,
-                    Position = milestone.Position,
-                    Tasks = new List<ProjectMilestoneTask>()
+                    Milestones = new List<ProjectCycleMilestone>()
                 };
 
-                foreach (var task in milestone.Tasks)
+                line.Cycle = projectCycle;
+                project = await _projectRepository.EditAsync(project);
+
+                foreach (var milestone in cycle.Milestones)
                 {
-                    var projectMilestoneTask = new ProjectMilestoneTask
+                    var projectMilestone = new ProjectCycleMilestone
                     {
-                        Status = TaskStatus.NotStarted,
-                        Name = task.Name
+                        Status = MilestoneStatus.NotStarted,
+                        Name = milestone.Name,
+                        Position = milestone.Position,
+                        Tasks = new List<ProjectMilestoneTask>()
                     };
-                    projectMilestone.Tasks.Add(projectMilestoneTask);
+
+                    foreach (var task in milestone.Tasks)
+                    {
+                        var projectMilestoneTask = new ProjectMilestoneTask
+                        {
+                            Status = TaskStatus.NotStarted,
+                            Name = task.Name
+                        };
+                        projectMilestone.Tasks.Add(projectMilestoneTask);
+                    }
+
+                    projectCycle.Milestones.Add(projectMilestone);
                 }
 
-                projectCycle.Milestones.Add(projectMilestone);
+                // Start cycle and first milestone
+                var firstMilestone = projectCycle.Milestones.OrderBy(m => m.Position).First();
+                firstMilestone.Started = DateTime.UtcNow;
+                firstMilestone.Status = MilestoneStatus.InProgress;
+
+                projectCycle.Milestone = firstMilestone;
+                projectCycle.Started = DateTime.UtcNow;
+                projectCycle.Status = CycleStatus.InProgress;
+
+                project = await _projectRepository.EditAsync(project);
             }
 
-            project = await _projectRepository.EditAsync(project);
-
-            // Start cycle and first milestone
-            var firstMilestone = projectCycle.Milestones.OrderBy(m => m.Position).First();
-            firstMilestone.Started = DateTime.UtcNow;
-            firstMilestone.Status = MilestoneStatus.InProgress;
-            
-            projectCycle.Milestone = firstMilestone;
-            projectCycle.Started = DateTime.UtcNow;
-            projectCycle.Status = CycleStatus.InProgress;
-
-            project.Cycle = projectCycle;
             project.Started = DateTime.UtcNow;
             project.Status = ProjectStatus.InProgress;
 

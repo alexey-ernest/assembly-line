@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,6 +9,8 @@ using AssemblyLine.Configuration;
 using AssemblyLine.DAL.Entities;
 using AssemblyLine.DAL.Repositories;
 using AssemblyLine.Infrastructure.Filters.Api;
+using AssemblyLine.Mappings;
+using AssemblyLine.Models;
 
 namespace AssemblyLine.Controllers.Api.Projects
 {
@@ -18,17 +19,19 @@ namespace AssemblyLine.Controllers.Api.Projects
     public class ProjectsController : ApiController
     {
         private readonly IProjectRepository _repository;
+        private readonly IMapper _mapper;
 
-        public ProjectsController(IProjectRepository repository)
+        public ProjectsController(IProjectRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [EnableQuery]
-        public IQueryable<Project> Get()
+        public IQueryable<ProjectListModel> Get()
         {
-            IQueryable<Project> entities = _repository.AsQueryable().Include(p => p.Vehicle);
-            return entities;
+            var entities = _repository.AsQueryable();
+            return _mapper.Project<Project, ProjectListModel>(entities);
         }
 
         public async Task<Project> Get(int id)
@@ -51,8 +54,8 @@ namespace AssemblyLine.Controllers.Api.Projects
 
             model = await _repository.AddAsync(model);
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, model);
-            string uri = Url.Link(RouteNames.ProjectsApi, new { id = model.Id });
+            var response = Request.CreateResponse(HttpStatusCode.Created, model);
+            var uri = Url.Link(RouteNames.ProjectsApi, new {id = model.Id});
             response.Headers.Location = new Uri(uri);
             return response;
         }
@@ -67,7 +70,7 @@ namespace AssemblyLine.Controllers.Api.Projects
             model.Id = id;
             model = await _repository.EditAsync(model);
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, model);
+            var response = Request.CreateResponse(HttpStatusCode.OK, model);
             return response;
         }
 

@@ -1,4 +1,4 @@
-﻿using AssemblyLine.DAL.Entities;
+﻿using System.Collections.Generic;
 
 namespace AssemblyLine.Models
 {
@@ -6,6 +6,8 @@ namespace AssemblyLine.Models
     {
         public int Id { get; set; }
 
-        public virtual Line Line { get; set; }
+        public AssemblyLineModel Line { get; set; }
+
+        public IEnumerable<ProjectLineMilestoneModel> Milestones { get; set; }
     }
 }

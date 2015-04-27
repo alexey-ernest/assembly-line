@@ -5,6 +5,7 @@
 }
 
 .brand {
+    display: block;
     height: 40px;
     background: url(images/brand.png) no-repeat center center;
     -ms-background-size: contain;

@@ -1,8 +1,38 @@
 ﻿<script type="text/ng-template" id="home.html">
     
-    <h1>Home</h1>
-    <ul>
-        <li ng-repeat="e in employees">{{e.firstName}} {{e.lastName}}</li>
-    </ul>
+    <h1>Dashboard</h1>
+    
+    <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+        <a class="btn btn-default" ui-sref=".lines">Project Status</a>
+        <a class="btn btn-default" ui-sref=".milestones">Assembly Line Status</a>
+        <a class="btn btn-default" ui-sref=".tasks">Task Status</a>
+    </div>
+    
+    <p>&nbsp;</p>
+    <div ui-view></div>
+
+</script>
+
+<script type="text/ng-template" id="home.lines.html">
+    
+    <div ng-repeat="p in projects">
+        <h2>{{p.name}}</h2>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th ng-repeat="m in milestones">{{m.name}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="l in lines[p.id]">
+                    <th scope="row">{{l.line.name}}</th>
+                    <td ng-repeat="m in milestones"><i>{{milestoneStatuses[l.milestones[$index].status]}}</i></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
 
 </script>

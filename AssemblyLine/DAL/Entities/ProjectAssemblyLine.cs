@@ -17,5 +17,8 @@ namespace AssemblyLine.DAL.Entities
 
         [Display(Name = "Procurement Team")]
         public virtual AssemblyLineTeam ProcurementTeam { get; set; }
+
+        [JsonIgnore]
+        public virtual ProjectProductionCycle Cycle { get; set; }
     }
 }
