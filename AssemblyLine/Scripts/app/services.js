@@ -375,4 +375,25 @@
         }
     ]);
 
+    module.factory('projectCycleService', [
+        '$resource', '$q', function ($resource, $q) {
+
+            var resource = $resource('/api/projects/:id/cycle', { id: '@id' });
+
+            return {
+                kickOff: function (id) {
+
+                    var deferred = $q.defer();
+
+                    resource.save({id: id}, function () {
+                        deferred.resolve();
+                    }, function () {
+                        deferred.reject();
+                    });
+                    return deferred.promise;
+                }
+            };
+        }
+    ]);
+
 })(window, window.angular);

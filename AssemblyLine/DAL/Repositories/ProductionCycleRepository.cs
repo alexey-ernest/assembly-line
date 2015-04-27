@@ -1,27 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
-using System.Web;
 using AssemblyLine.DAL.Entities;
 
 namespace AssemblyLine.DAL.Repositories
 {
-    public class ProductionCycleRepository: IProductionCycleRepository
+    public class ProductionCycleRepository : IProductionCycleRepository
     {
-        public void Dispose()
+        private readonly ApplicationDbContext _db;
+
+        public ProductionCycleRepository(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
         }
 
-        public Task SaveChangesAsync()
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            _db.Dispose();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _db.SaveChangesAsync();
         }
 
         public Task<ProductionCycle> GetAsync()
         {
-            throw new NotImplementedException();
+            return _db.ProductionCycles.FirstOrDefaultAsync();
         }
     }
 }

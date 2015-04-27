@@ -10,6 +10,7 @@
         public const string EmployeeApi = "EmployeeApi";
         public const string ProjectsApi = "ProjectsApi";
         public const string ProjectLinesApi = "ProjectLinesApi";
+        public const string ProjectCycleApi = "ProjectCycleApi";
         public const string VehiclesApi = "VehiclesApi";
         public const string LinesApi = "LinesApi";
     }

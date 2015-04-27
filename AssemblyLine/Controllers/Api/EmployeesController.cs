@@ -9,6 +9,7 @@ using AssemblyLine.Configuration;
 using AssemblyLine.DAL.Entities;
 using AssemblyLine.DAL.Repositories;
 using AssemblyLine.Infrastructure.Filters.Api;
+using AssemblyLine.Models;
 
 namespace AssemblyLine.Controllers.Api
 {
@@ -24,9 +25,19 @@ namespace AssemblyLine.Controllers.Api
         }
 
         [EnableQuery]
-        public IQueryable<Employee> Get()
+        public IQueryable<EmployeeListModel> Get()
         {
-            IQueryable<Employee> entities = _repository.AsQueryable();
+            var entities =
+                _repository.AsQueryable()
+                    .Select(
+                        e =>
+                            new EmployeeListModel
+                            {
+                                Id = e.Id,
+                                FirstName = e.FirstName,
+                                LastName = e.LastName,
+                                Post = e.Post
+                            });
             return entities;
         }
 
@@ -50,8 +61,8 @@ namespace AssemblyLine.Controllers.Api
 
             model = await _repository.AddAsync(model);
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, model);
-            string uri = Url.Link(RouteNames.EmployeeApi, new { id = model.Id });
+            var response = Request.CreateResponse(HttpStatusCode.Created, model);
+            var uri = Url.Link(RouteNames.EmployeeApi, new {id = model.Id});
             response.Headers.Location = new Uri(uri);
             return response;
         }
@@ -66,7 +77,7 @@ namespace AssemblyLine.Controllers.Api
             model.Id = id;
             model = await _repository.EditAsync(model);
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, model);
+            var response = Request.CreateResponse(HttpStatusCode.OK, model);
             return response;
         }
 

@@ -1,4 +1,5 @@
 using System;
+using AssemblyLine.BLL;
 using AssemblyLine.Common.Configuration;
 using AssemblyLine.Common.Initializers;
 using AssemblyLine.Common.Logging;
@@ -54,9 +55,10 @@ namespace AssemblyLine
             container.RegisterType<IProjectRepository, ProjectRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IProjectLinesRepository, ProjectLinesRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IAssemblyLineTeamRepository, AssemblyLineTeamRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IProductionCycleRepository, ProductionCycleRepository>(new PerRequestLifetimeManager());
 
             // BLL
-
+            container.RegisterType<IProjectService, ProjectService>(new PerRequestLifetimeManager());
 
             // Services
             container.RegisterType<ILogService, TraceLogService>(new ContainerControlledLifetimeManager());

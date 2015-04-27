@@ -4,7 +4,7 @@
     <h1>Projects <a class="btn btn-default" ui-sref="^.projectcreate"><i class="glyphicon glyphicon-plus"></i></a></h1>
     <div class="list-group" infinite-scroll="nextPage()">
         <a href="" ng-repeat="i in items" ui-sref="^.projectdetails({id: i.id})" class="list-group-item">
-            {{i.name}} <small><i>({{i.assemblyLinesNumber}} lines)</i></small>
+            {{i.name}} <small><i>{{statuses[i.status]}}</i></small>
         </a>
     </div>
 
@@ -62,13 +62,12 @@
             <p>&nbsp;</p>
             <div class="form-group">
                 <a class="btn btn-default" ui-sref="^.projects">&larr; Back</a>
-                <button type="submit" class="btn btn-primary" ng-disabled="itemForm.$invalid || item.$isLoading">
+                <button type="submit" class="btn btn-primary" ng-disabled="itemForm.$invalid || item.$isLoading || item.status > 0">
                     <span ng-if="item.$isLoading === undefined">Save</span>
-                    <span ng-if="item.$isLoading === false"><i class="fa fa-check"></i> Saved</span>
-                    <span ng-if="item.$isLoading === true"><i class="fa fa-spinner fa-spin"></i> Saving...</span>
+                    <span ng-if="item.$isLoading === false">Saved</span>
+                    <span ng-if="item.$isLoading === true">Saving...</span>
                 </button>
-                <a href="#" class="btn btn-success" on-confirm-click confirm-click="start(item)">Start</a>
-                <a href="#" class="btn btn-default" on-confirm-click confirm-click="delete(item)">Delete</a>
+                <a href="#" class="btn btn-success" on-confirm-click confirm-click="start(item)">Start Production Cycle</a>
             </div>
 
         </form>

@@ -22,7 +22,6 @@ namespace AssemblyLine.DAL.Entities
 
         public DateTime Created { get; set; }
 
-
         public virtual ICollection<TaskPerformer> Tasks { get; set; }
     }
 }

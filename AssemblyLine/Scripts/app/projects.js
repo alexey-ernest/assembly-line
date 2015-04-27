@@ -64,6 +64,13 @@
                 take: 20
             };
 
+            $scope.statuses = {
+                0: 'New',
+                1: 'InProgress',
+                2: 'Cancelled',
+                3: 'Completed'
+            };
+
             $scope.isLoading = false;
             $scope.isAllLoaded = false;
 
@@ -111,8 +118,8 @@
     ]);
 
     module.controller('ProjectDetailsCtrl', [
-        '$scope', '$state', 'projectService', '$stateParams', 'vehicleService', 'projectLineService',
-        function ($scope, $state, projectService, $stateParams, vehicleService, projectLineService) {
+        '$scope', '$state', 'projectService', '$stateParams', 'vehicleService', 'projectLineService', 'projectCycleService',
+        function ($scope, $state, projectService, $stateParams, vehicleService, projectLineService,projectCycleService) {
 
             $scope.item = null;
             $scope.vehicles = [];
@@ -176,6 +183,14 @@
                     $state.go('^.projects');
                 }, function (reason) {
                     throw new Error(reason);
+                });
+            }
+
+            $scope.start = function(item) {
+                projectCycleService.kickOff(item.id).then(function() {
+                    $state.go('^.projects');
+                }, function() {
+                    throw new Error('Could not start the project.');
                 });
             }
 
