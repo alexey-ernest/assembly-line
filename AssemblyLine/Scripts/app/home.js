@@ -57,7 +57,7 @@
             };
 
             function loadProjectLines(id) {
-                projectLineService.query(id, { orderBy: 'Name' }).then(function(data) {
+                projectLineService.query(id, { orderBy: 'Line/Name' }).then(function (data) {
                     $scope.lines[id] = data;
                     if (!$scope.milestones.length && data.length > 0) {
                         $scope.milestones = data[0].milestones;

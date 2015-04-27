@@ -26,7 +26,8 @@ namespace AssemblyLine.DAL.Repositories
 
         public async Task<AssemblyLineTeam> AddAsync(AssemblyLineTeam entity)
         {
-            entity.Manager = await _db.Employees.FindAsync(entity.Manager.Id);
+            entity.Manager = entity.Manager != null ? await _db.Employees.FindAsync(entity.Manager.Id) : null;
+
             var engineers = new List<Employee>();
             foreach (var engineer in entity.Engineers)
             {
