@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.OData;
@@ -29,16 +32,21 @@ namespace AssemblyLine.Controllers.Api.Dashboard
         [EnableQuery]
         public IQueryable<ProjectModel> GetProjectStatuses()
         {
-            var entities = _projectsRepository.AsQueryable();
-            return _mapper.Project<Project, ProjectModel>(entities);
+            var projects = _projectsRepository.AsQueryable();
+            return _mapper.Project<Project, ProjectModel>(projects);
         }
 
         [Route("lines/{id:int}")]
         [EnableQuery]
-        public async Task<IQueryable<ProjectLineMilestoneModel>> GetLineStatuses(int id)
+        public async Task<IEnumerable<ProjectLineMilestoneModel>> GetLineStatuses(int id)
         {
-            var entities = await _lineRepository.GetAsync(id);
-            return _mapper.Project<ProjectAssemblyLine, ProjectLineMilestoneModel>(entities);
+            var line = await _lineRepository.GetWithMilestoneTasksAsync(id);
+            if (line == null || line.Cycle == null)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+            }
+
+            return line.Cycle.Milestones.Select(m => _mapper.Map<ProjectCycleMilestone, ProjectLineMilestoneModel>(m));
         }
     }
 }

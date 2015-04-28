@@ -9,6 +9,7 @@ using AssemblyLine.Configuration;
 using AssemblyLine.DAL.Entities;
 using AssemblyLine.DAL.Repositories;
 using AssemblyLine.Infrastructure.Filters.Api;
+using AssemblyLine.Mappings;
 using AssemblyLine.Models;
 
 namespace AssemblyLine.Controllers.Api
@@ -18,27 +19,19 @@ namespace AssemblyLine.Controllers.Api
     public class EmployeesController : ApiController
     {
         private readonly IEmployeeRepository _repository;
+        private readonly IMapper _mapper;
 
-        public EmployeesController(IEmployeeRepository repository)
+        public EmployeesController(IEmployeeRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [EnableQuery]
         public IQueryable<EmployeeListModel> Get()
         {
-            var entities =
-                _repository.AsQueryable()
-                    .Select(
-                        e =>
-                            new EmployeeListModel
-                            {
-                                Id = e.Id,
-                                FirstName = e.FirstName,
-                                LastName = e.LastName,
-                                Post = e.Post
-                            });
-            return entities;
+            var entities = _repository.AsQueryable();
+            return _mapper.Project<Employee, EmployeeListModel>(entities);
         }
 
         public async Task<Employee> Get(int id)

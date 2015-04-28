@@ -13,6 +13,8 @@ namespace AssemblyLine.DAL.Repositories
 
         Task<ProjectAssemblyLine> GetAsync(int id);
 
+        Task<ProjectAssemblyLine> GetWithMilestoneTasksAsync(int id);
+
         Task<ProjectAssemblyLine> EditAsync(ProjectAssemblyLine entity);
     }
 }

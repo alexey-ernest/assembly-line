@@ -52,6 +52,17 @@ namespace AssemblyLine.DAL.Repositories
                     .FirstOrDefaultAsync(l => l.Id == id);
         }
 
+        public Task<ProjectAssemblyLine> GetWithMilestoneTasksAsync(int id)
+        {
+            return
+                _db.ProjectLines
+                    .Include(l => l.Line)
+                    .Include(l => l.ProductionTeam)
+                    .Include(l => l.ProcurementTeam)
+                    .Include(l => l.Cycle)
+                    .FirstOrDefaultAsync(l => l.Id == id);
+        }
+
         public async Task<ProjectAssemblyLine> EditAsync(ProjectAssemblyLine entity)
         {
             var original = await _db.ProjectLines.FindAsync(entity.Id);

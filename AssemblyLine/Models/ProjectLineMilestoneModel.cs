@@ -9,8 +9,10 @@ namespace AssemblyLine.Models
 
         public string Name { get; set; }
 
+        public int Position { get; set; }
+
         public MilestoneStatus Status { get; set; }
 
-        public List<MilestoneTaskListModel> Tasks { get; set; }
+        public List<ProjectMilestoneTaskListModel> Tasks { get; set; }
     }
 }

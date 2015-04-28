@@ -1,4 +1,6 @@
-﻿namespace AssemblyLine.Models
+﻿using System;
+
+namespace AssemblyLine.Models
 {
     public class EmployeeListModel
     {
@@ -9,5 +11,7 @@
         public string LastName { get; set; }
 
         public string Post { get; set; }
+
+        public DateTime Created { get; set; }
     }
 }

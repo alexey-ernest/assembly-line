@@ -301,6 +301,7 @@
     <Compile Include="Mappings\ProjectLineMapping.cs" />
     <Compile Include="Mappings\ProjectMapping.cs" />
     <Compile Include="Mappings\ProjectMilestoneMapping.cs" />
+    <Compile Include="Mappings\ProjectMilestoneTaskMapping.cs" />
     <Compile Include="Migrations\201504260918117_Init.cs" />
     <Compile Include="Migrations\201504260918117_Init.Designer.cs">
       <DependentUpon>201504260918117_Init.cs</DependentUpon>
@@ -359,6 +360,7 @@
     <Compile Include="Models\EmployeeListModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="DAL\Entities\User.cs" />
+    <Compile Include="Models\ProjectMilestoneTaskListModel.cs" />
     <Compile Include="Models\MilestoneTaskListModel.cs" />
     <Compile Include="Models\ProjectCycleMapping.cs" />
     <Compile Include="Models\ProjectLineCycleModel.cs" />

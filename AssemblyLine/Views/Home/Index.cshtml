@@ -2,23 +2,23 @@
     ViewBag.Title = "Melnikov Assembly Line Application";
 }
 
-<div class="panel page-container">
-    <div class="panel-heading"></div>
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="list-group">
-                    <a href="" ui-sref="app.home" class="list-group-item">Dashboard</a>
-                </div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="" ui-sref="app.home" class="list-group-item">Dashboard</a>
+        </div>
 
-                <div class="list-group">
-                    <a href="" ui-sref="app.projects" class="list-group-item">Projects</a>
-                    <a href="" ui-sref="app.lines" class="list-group-item">Lines</a>
-                    <a href="" ui-sref="app.vehicles" class="list-group-item">Vehicles</a>
-                    <a href="" ui-sref="app.employees" class="list-group-item">Employees</a>
-                </div>
-            </div>
-            <div class="col-md-8 col-md-offset-1">
+        <div class="list-group">
+            <a href="" ui-sref="app.projects" class="list-group-item">Projects</a>
+            <a href="" ui-sref="app.lines" class="list-group-item">Lines</a>
+            <a href="" ui-sref="app.vehicles" class="list-group-item">Vehicles</a>
+            <a href="" ui-sref="app.employees" class="list-group-item">Employees</a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="panel page-container">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
                 <div ui-view></div>
             </div>
         </div>
