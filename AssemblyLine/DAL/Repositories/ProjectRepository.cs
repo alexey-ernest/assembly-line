@@ -50,6 +50,9 @@ namespace AssemblyLine.DAL.Repositories
                 entity.AssemblyLines = lines;
             }
 
+            // retrieving original vehicle
+            entity.Vehicle = entity.Vehicle != null ? await _db.Vehicles.FindAsync(entity.Vehicle.Id) : null;
+
             entity = _db.Projects.Add(entity);
             await SaveChangesAsync();
 

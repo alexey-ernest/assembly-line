@@ -3,6 +3,45 @@
 
     var module = angular.module('services', ['ngResource']);
 
+    function buildODataQueryParams(filter, customParams) {
+
+        customParams = customParams || {};
+
+        var params = {};
+
+        // standard params
+        if (filter.orderBy) {
+            var order = filter.orderByDesc ? 'desc' : 'asc';
+            params['$orderby'] = filter.orderBy + ' ' + order;
+            delete filter.orderBy;
+            delete filter.orderByDesc;
+        }
+
+        if (filter.skip) {
+            params['$skip'] = filter.skip;
+            delete filter.skip;
+        }
+
+        if (filter.take) {
+            params['$top'] = filter.take;
+            delete filter.take;
+        }
+
+        // custom params
+        var filterParts = [];
+        for (var param in customParams) {
+            if (!filter.hasOwnProperty(param)) continue;
+            filterParts.push(customParams[param].replace('%', filter[param]));
+        }
+
+        if (filterParts.length > 0) {
+            var filterExpr = filterParts.join(' and ');
+            params['$filter'] = filterExpr;
+        }
+
+        return params;
+    }
+
     module.factory('$exceptionHandler', [
         function() {
             return function(exception) {
@@ -46,38 +85,9 @@
                 query: function(filter) {
 
                     filter = filter || {};
-
-                    // OData params
-                    var params = {};
-
-                    var filterExpr = null;
-                    var filterParts = [];
-
-                    if (filter.name) {
-                        filterParts.push("substringof('" + filter.name + "',FirstName) or substringof('" + filter.name  + "',LastName)");
-                    }
-                    if (filterParts.length > 0) {
-                        filterExpr = filterParts.join(' and ');
-                    }
-                    if (filterExpr) {
-                        params['$filter'] = filterExpr;
-                    }
-
-                    if (filter.orderBy) {
-                        var order = filter.orderByDesc ? 'desc' : 'asc';
-                        params['$orderby'] = filter.orderBy + ' ' + order;
-                    }
-
-                    if (filter.skip) {
-                        params['$skip'] = filter.skip;
-                    }
-
-                    if (filter.take) {
-                        params['$top'] = filter.take;
-                    }
+                    var params = buildODataQueryParams(filter, { 'name': "substringof('%',FirstName) or substringof('%',LastName)" });
 
                     var deferred = $q.defer();
-
                     resource.query(params, function (data) {
                         deferred.resolve(data);
                     }, function() {
@@ -119,38 +129,9 @@
                 query: function (filter) {
 
                     filter = filter || {};
-
-                    // OData params
-                    var params = {};
-
-                    var filterExpr = null;
-                    var filterParts = [];
-
-                    if (filter.name) {
-                        filterParts.push("substringof('" + filter.name + "',Name)");
-                    }
-                    if (filterParts.length > 0) {
-                        filterExpr = filterParts.join(' and ');
-                    }
-                    if (filterExpr) {
-                        params['$filter'] = filterExpr;
-                    }
-
-                    if (filter.orderBy) {
-                        var order = filter.orderByDesc ? 'desc' : 'asc';
-                        params['$orderby'] = filter.orderBy + ' ' + order;
-                    }
-
-                    if (filter.skip) {
-                        params['$skip'] = filter.skip;
-                    }
-
-                    if (filter.take) {
-                        params['$top'] = filter.take;
-                    }
+                    var params = buildODataQueryParams(filter, { 'name': "substringof('%',Name)" });
 
                     var deferred = $q.defer();
-
                     resource.query(params, function (data) {
                         deferred.resolve(data);
                     }, function () {
@@ -192,38 +173,9 @@
                 query: function (filter) {
 
                     filter = filter || {};
-
-                    // OData params
-                    var params = {};
-
-                    var filterExpr = null;
-                    var filterParts = [];
-
-                    if (filter.name) {
-                        filterParts.push("substringof('" + filter.name + "',Name)");
-                    }
-                    if (filterParts.length > 0) {
-                        filterExpr = filterParts.join(' and ');
-                    }
-                    if (filterExpr) {
-                        params['$filter'] = filterExpr;
-                    }
-
-                    if (filter.orderBy) {
-                        var order = filter.orderByDesc ? 'desc' : 'asc';
-                        params['$orderby'] = filter.orderBy + ' ' + order;
-                    }
-
-                    if (filter.skip) {
-                        params['$skip'] = filter.skip;
-                    }
-
-                    if (filter.take) {
-                        params['$top'] = filter.take;
-                    }
-
+                    var params = buildODataQueryParams(filter, { 'name': "substringof('%',Name)" });
+                    
                     var deferred = $q.defer();
-
                     resource.query(params, function (data) {
                         deferred.resolve(data);
                     }, function () {
@@ -265,41 +217,9 @@
                 query: function (filter) {
 
                     filter = filter || {};
-
-                    // OData params
-                    var params = {};
-
-                    var filterExpr = null;
-                    var filterParts = [];
-
-                    if (filter.name) {
-                        filterParts.push("substringof('" + filter.name + "',Name)");
-                    }
-                    if (filter.active) {
-                        filterParts.push("Status eq 'InProgress'");
-                    }
-                    if (filterParts.length > 0) {
-                        filterExpr = filterParts.join(' and ');
-                    }
-                    if (filterExpr) {
-                        params['$filter'] = filterExpr;
-                    }
-
-                    if (filter.orderBy) {
-                        var order = filter.orderByDesc ? 'desc' : 'asc';
-                        params['$orderby'] = filter.orderBy + ' ' + order;
-                    }
-
-                    if (filter.skip) {
-                        params['$skip'] = filter.skip;
-                    }
-
-                    if (filter.take) {
-                        params['$top'] = filter.take;
-                    }
+                    var params = buildODataQueryParams(filter, { 'name': "substringof('%',Name)", 'active': "Status eq 'InProgress'" });
 
                     var deferred = $q.defer();
-
                     resource.query(params, function (data) {
                         deferred.resolve(data);
                     }, function () {
@@ -337,35 +257,10 @@
                 query: function (pid, filter) {
 
                     filter = filter || {};
-
-                    // OData params
-                    var params = { pid: pid };
-
-                    var filterExpr = null;
-                    var filterParts = [];
-
-                    if (filterParts.length > 0) {
-                        filterExpr = filterParts.join(' and ');
-                    }
-                    if (filterExpr) {
-                        params['$filter'] = filterExpr;
-                    }
-
-                    if (filter.orderBy) {
-                        var order = filter.orderByDesc ? 'desc' : 'asc';
-                        params['$orderby'] = filter.orderBy + ' ' + order;
-                    }
-
-                    if (filter.skip) {
-                        params['$skip'] = filter.skip;
-                    }
-
-                    if (filter.take) {
-                        params['$top'] = filter.take;
-                    }
-
+                    var params = buildODataQueryParams(filter);
+                    params.pid = pid;
+                    
                     var deferred = $q.defer();
-
                     resource.query(params, function (data) {
                         deferred.resolve(data);
                     }, function () {
@@ -405,40 +300,12 @@
             return {
                 queryProjectStatuses: function (filter) {
 
+                    var resource = $resource('/api/dashboard/projects');
+
                     filter = filter || {};
-
-                    // OData params
-                    var params = {};
-
-                    var filterExpr = null;
-                    var filterParts = [];
-
-                    if (filter.active) {
-                        filterParts.push("Status eq 'InProgress'");
-                    }
-                    if (filterParts.length > 0) {
-                        filterExpr = filterParts.join(' and ');
-                    }
-                    if (filterExpr) {
-                        params['$filter'] = filterExpr;
-                    }
-
-                    if (filter.orderBy) {
-                        var order = filter.orderByDesc ? 'desc' : 'asc';
-                        params['$orderby'] = filter.orderBy + ' ' + order;
-                    }
-
-                    if (filter.skip) {
-                        params['$skip'] = filter.skip;
-                    }
-
-                    if (filter.take) {
-                        params['$top'] = filter.take;
-                    }
+                    var params = buildODataQueryParams(filter, { 'active': "Status eq 'InProgress'" });
 
                     var deferred = $q.defer();
-
-                    var resource = $resource('/api/dashboard/projects');
                     resource.query(params, function (data) {
                         deferred.resolve(data);
                     }, function () {
