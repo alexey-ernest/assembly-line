@@ -16,7 +16,7 @@
                     templateUrl: 'projects.html',
                     controller: 'ProjectsCtrl',
                     data: {
-                        pageTitle: 'Projects at Melnikov Assembly Line Application',
+                        pageTitle: 'Projects',
                         roles: [userRoles.all]
                     }
                 })
@@ -25,7 +25,7 @@
                     templateUrl: 'projects.details.html',
                     controller: 'ProjectDetailsCtrl',
                     data: {
-                        pageTitle: 'Project Details at Melnikov Assembly Line Application',
+                        pageTitle: 'Project Details',
                         roles: [userRoles.all]
                     }
                 })
@@ -34,7 +34,7 @@
                     templateUrl: 'projects.line.html',
                     controller: 'ProjectLineCtrl',
                     data: {
-                        pageTitle: 'Project Assembly Line at Melnikov Assembly Line Application',
+                        pageTitle: 'Project Assembly Line',
                         roles: [userRoles.all]
                     }
                 })
@@ -43,7 +43,7 @@
                     templateUrl: 'projects.create.html',
                     controller: 'ProjectCreateCtrl',
                     data: {
-                        pageTitle: 'New Employee at Melnikov Assembly Line Application',
+                        pageTitle: 'New Project',
                         roles: [userRoles.all]
                     }
                 });

@@ -48,7 +48,7 @@
             // SYSTEM EVENTS
             $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, from, fromParams) {
                 if (angular.isDefined(toState.data) && angular.isDefined(toState.data.pageTitle)) {
-                    $rootScope.pageTitle = toState.data.pageTitle;
+                    $rootScope.pageTitle = toState.data.pageTitle + ' - Melnikov Assembly Line Application';
                 }
 
                 // maintaining state transition data

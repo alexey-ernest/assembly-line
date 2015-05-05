@@ -30,7 +30,7 @@ namespace AssemblyLine.DAL
 
         public DbSet<AssemblyLineTeam> AssemblyLineTeams { get; set; }
 
-        public DbSet<ProjectAssemblyLine> ProjectLines { get; set; }
+        public DbSet<ProjectLine> ProjectLines { get; set; }
 
         public DbSet<ProductionCycle> ProductionCycles { get; set; }
 

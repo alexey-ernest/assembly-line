@@ -7,10 +7,10 @@ namespace AssemblyLine.Mappings
     {
         public void CreateMap()
         {
-            AutoMapper.Mapper.CreateMap<ProjectAssemblyLine, ProjectLineListModel>()
+            AutoMapper.Mapper.CreateMap<ProjectLine, ProjectLineListModel>()
                 ;
 
-            AutoMapper.Mapper.CreateMap<ProjectAssemblyLine, ProjectLineModel>()
+            AutoMapper.Mapper.CreateMap<ProjectLine, ProjectLineModel>()
                 ;
         }
     }

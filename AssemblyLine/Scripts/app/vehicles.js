@@ -16,7 +16,7 @@
                     templateUrl: 'vehicles.html',
                     controller: 'VehiclesCtrl',
                     data: {
-                        pageTitle: 'Vehicles at Melnikov Assembly Line Application',
+                        pageTitle: 'Vehicles',
                         roles: [userRoles.all]
                     }
                 })
@@ -25,7 +25,7 @@
                     templateUrl: 'vehicles.details.html',
                     controller: 'VehicleDetailsCtrl',
                     data: {
-                        pageTitle: 'Vehicle Details at Melnikov Assembly Line Application',
+                        pageTitle: 'Vehicle Details',
                         roles: [userRoles.all]
                     }
                 })
@@ -34,7 +34,7 @@
                     templateUrl: 'vehicles.create.html',
                     controller: 'VehicleCreateCtrl',
                     data: {
-                        pageTitle: 'New Vehicle at Melnikov Assembly Line Application',
+                        pageTitle: 'New Vehicle',
                         roles: [userRoles.all]
                     }
                 });
@@ -49,8 +49,8 @@
             // PROPERTIES
             $scope.items = [];
             $scope.filter = {
-                orderBy: 'Id',
-                orderByDesc: true,
+                orderBy: 'Name',
+                orderByDesc: false,
                 skip: 0,
                 take: 20
             };
@@ -148,7 +148,7 @@
         '$scope', '$state', 'vehicleService',
         function ($scope, $state, vehicleService) {
 
-            $scope.item = vehicleService.create({ firstName: null, lastName: null });
+            $scope.item = vehicleService.create({ name: 'New Vehicle' });
             $scope.isLoading = false;
 
             $scope.create = function (form, item) {

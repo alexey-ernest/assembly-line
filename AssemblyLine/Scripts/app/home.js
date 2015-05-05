@@ -16,7 +16,7 @@
                     templateUrl: 'home.html',
                     controller: 'HomeCtrl',
                     data: {
-                        pageTitle: 'Melnikov Assembly Line Application',
+                        pageTitle: 'Home Page',
                         roles: [userRoles.all]
                     }
                 })
@@ -25,7 +25,7 @@
                     templateUrl: 'home.lines.html',
                     controller: 'HomeLinesCtrl',
                     data: {
-                        pageTitle: 'Assembly Lines Status on Melnikov Assembly Line Application',
+                        pageTitle: 'Assembly Line Status',
                         roles: [userRoles.all]
                     }
                 });

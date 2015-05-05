@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AssemblyLine.DAL.Entities
 {
-    public class ProjectProductionCycle
+    public class ProjectLineCycle
     {
         public int Id { get; set; }
 
@@ -17,6 +17,6 @@ namespace AssemblyLine.DAL.Entities
 
         public virtual ProjectCycleMilestone Milestone { get; set; }
 
-        public virtual ProjectAssemblyLine AssemblyLine { get; set; }
+        public virtual ProjectLine Line { get; set; }
     }
 }

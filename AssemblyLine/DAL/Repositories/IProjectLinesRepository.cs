@@ -7,14 +7,14 @@ namespace AssemblyLine.DAL.Repositories
 {
     public interface IProjectLinesRepository : IRepository
     {
-        IQueryable<ProjectAssemblyLine> AsQueryable();
+        IQueryable<ProjectLine> AsQueryable();
 
-        Task<List<ProjectAssemblyLine>> GetByProjectAsync(int projectId);
+        Task<List<ProjectLine>> GetByProjectAsync(int projectId);
 
-        Task<ProjectAssemblyLine> GetAsync(int id);
+        Task<ProjectLine> GetAsync(int id);
 
-        Task<ProjectAssemblyLine> GetWithMilestoneTasksAsync(int id);
+        Task<ProjectLine> GetWithMilestoneTasksAsync(int id);
 
-        Task<ProjectAssemblyLine> EditAsync(ProjectAssemblyLine entity);
+        Task<ProjectLine> EditAsync(ProjectLine entity);
     }
 }

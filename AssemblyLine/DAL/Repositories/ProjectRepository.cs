@@ -34,7 +34,7 @@ namespace AssemblyLine.DAL.Repositories
 
         public async Task<Project> GetAsync(int id)
         {
-            return await _db.Projects.FirstOrDefaultAsync(p => p.Id == id);
+            return await _db.Projects.FindAsync(id);
         }
 
         public async Task<Project> AddAsync(Project entity)
@@ -56,7 +56,7 @@ namespace AssemblyLine.DAL.Repositories
             return entity;
         }
 
-        private async Task<List<ProjectAssemblyLine>> AllocateAssemblyLinesAsync(int number)
+        private async Task<List<ProjectLine>> AllocateAssemblyLinesAsync(int number)
         {
             // trying allocate free lines
             var lines = await _db.Lines.OrderBy(l => l.Status).ToListAsync();
@@ -65,10 +65,10 @@ namespace AssemblyLine.DAL.Repositories
                 throw new BadRequestException("Not enough assembly lines");
             }
 
-            var projectLines = new List<ProjectAssemblyLine>();
+            var projectLines = new List<ProjectLine>();
             for (var i = 0; i < number; i++)
             {
-                var line = new ProjectAssemblyLine
+                var line = new ProjectLine
                 {
                     Line = lines[i]
                 };

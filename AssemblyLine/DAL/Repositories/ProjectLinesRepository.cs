@@ -28,12 +28,12 @@ namespace AssemblyLine.DAL.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public IQueryable<ProjectAssemblyLine> AsQueryable()
+        public IQueryable<ProjectLine> AsQueryable()
         {
             return _db.ProjectLines;
         }
 
-        public Task<List<ProjectAssemblyLine>> GetByProjectAsync(int projectId)
+        public Task<List<ProjectLine>> GetByProjectAsync(int projectId)
         {
             return
                 _db.ProjectLines.Where(l => l.Project.Id == projectId)
@@ -42,7 +42,7 @@ namespace AssemblyLine.DAL.Repositories
                     .ToListAsync();
         }
 
-        public Task<ProjectAssemblyLine> GetAsync(int id)
+        public Task<ProjectLine> GetAsync(int id)
         {
             return
                 _db.ProjectLines
@@ -52,7 +52,7 @@ namespace AssemblyLine.DAL.Repositories
                     .FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public Task<ProjectAssemblyLine> GetWithMilestoneTasksAsync(int id)
+        public Task<ProjectLine> GetWithMilestoneTasksAsync(int id)
         {
             return
                 _db.ProjectLines
@@ -63,7 +63,7 @@ namespace AssemblyLine.DAL.Repositories
                     .FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public async Task<ProjectAssemblyLine> EditAsync(ProjectAssemblyLine entity)
+        public async Task<ProjectLine> EditAsync(ProjectLine entity)
         {
             var original = await _db.ProjectLines.FindAsync(entity.Id);
             if (original == null)

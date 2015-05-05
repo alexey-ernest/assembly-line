@@ -253,7 +253,7 @@
     <Compile Include="DAL\Entities\MeetingMembershipStatus.cs" />
     <Compile Include="DAL\Entities\ProjectCycleMilestone.cs" />
     <Compile Include="DAL\Entities\ProjectMilestoneTask.cs" />
-    <Compile Include="DAL\Entities\ProjectProductionCycle.cs" />
+    <Compile Include="DAL\Entities\ProjectLineCycle.cs" />
     <Compile Include="DAL\Entities\TaskPerformer.cs" />
     <Compile Include="DAL\Entities\TaskPoint.cs" />
     <Compile Include="DAL\Entities\TaskStatus.cs" />
@@ -261,7 +261,7 @@
     <Compile Include="DAL\Entities\MilestoneTask.cs" />
     <Compile Include="DAL\Entities\ProductionCycle.cs" />
     <Compile Include="DAL\Entities\Project.cs" />
-    <Compile Include="DAL\Entities\ProjectAssemblyLine.cs" />
+    <Compile Include="DAL\Entities\ProjectLine.cs" />
     <Compile Include="DAL\Entities\CycleMilestone.cs" />
     <Compile Include="DAL\Entities\MilestoneStatus.cs" />
     <Compile Include="DAL\Entities\ProjectStatus.cs" />
@@ -291,6 +291,7 @@
     <Compile Include="Infrastructure\Filters\Api\ODataValidationExceptionFilterAttribute.cs" />
     <Compile Include="Infrastructure\Filters\Api\UnityFilterProvider.cs" />
     <Compile Include="Infrastructure\Filters\Api\ValidationHttpAttribute.cs" />
+    <Compile Include="Infrastructure\Helpers\HtmlHelpers.cs" />
     <Compile Include="Mappings\AssemblyLineMapping.cs" />
     <Compile Include="Mappings\AssemblyLineTeamMapping.cs" />
     <Compile Include="Mappings\EmployeeMapping.cs" />
@@ -354,6 +355,14 @@
     <Compile Include="Migrations\201504270212244_ProductionCycleForEachLine.Designer.cs">
       <DependentUpon>201504270212244_ProductionCycleForEachLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505051226098_RenameTables.cs" />
+    <Compile Include="Migrations\201505051226098_RenameTables.Designer.cs">
+      <DependentUpon>201505051226098_RenameTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505051316386_RequiredProjectVehicle.cs" />
+    <Compile Include="Migrations\201505051316386_RequiredProjectVehicle.Designer.cs">
+      <DependentUpon>201505051316386_RequiredProjectVehicle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AssemblyLineModel.cs" />
     <Compile Include="Models\AssemblyLineTeamModel.cs" />
@@ -365,12 +374,17 @@
     <Compile Include="Models\ProjectCycleMapping.cs" />
     <Compile Include="Models\ProjectLineCycleModel.cs" />
     <Compile Include="Models\ProjectLineListModel.cs" />
-    <Compile Include="Models\ProjectLineMilestoneModel.cs" />
-    <Compile Include="Models\ProjectLineMilestoneListModel.cs" />
+    <Compile Include="Models\ProjectCycleMilestoneModel.cs" />
+    <Compile Include="Models\ProjectCycleMilestoneListModel.cs" />
     <Compile Include="Models\ProjectLineModel.cs" />
     <Compile Include="Models\ProjectListModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
@@ -428,6 +442,10 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -1261,6 +1279,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504270212244_ProductionCycleForEachLine.resx">
       <DependentUpon>201504270212244_ProductionCycleForEachLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505051226098_RenameTables.resx">
+      <DependentUpon>201505051226098_RenameTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505051316386_RequiredProjectVehicle.resx">
+      <DependentUpon>201505051316386_RequiredProjectVehicle.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

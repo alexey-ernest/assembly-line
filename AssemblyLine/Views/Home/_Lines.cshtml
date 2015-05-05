@@ -1,4 +1,5 @@
 ﻿@using AssemblyLine.DAL.Entities
+@using AssemblyLine.Infrastructure.Helpers
 <script type="text/ng-template" id="lines.html">
 
     <h1>Assembly Lines <a class="btn btn-default" ui-sref="^.linecreate"><i class="glyphicon glyphicon-plus"></i></a></h1>
@@ -18,12 +19,12 @@
 
     <h1>Assembly Line Details</h1>
 
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="update(itemForm, item)">
 
             <div class="form-group">
                 <label for="name">@Html.DisplayNameFor(x => new Line().Name)</label>
-                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
+                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" @Html.RequiredFor(x => new Line().Name) />
             </div>
 
             <p>&nbsp;</p>
@@ -51,18 +52,18 @@
 
     <h1>New Assembly Line</h1>
 
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="create(itemForm, item)">
 
             <div class="form-group">
                 <label for="name">@Html.DisplayNameFor(x => new Line().Name)</label>
-                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
+                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" @Html.RequiredFor(x => new Line().Name) />
             </div>
 
             <p>&nbsp;</p>
             <div class="form-group">
                 <a class="btn btn-default" ui-sref="^.lines">&larr; Back</a>
-                <button type="submit" class="btn btn-primary" ng-disabled="true">
+                <button type="submit" class="btn btn-primary" ng-disabled="itemForm.$invalid || item.$isLoading">
                     <span ng-if="item.$isLoading === undefined">Create</span>
                     <span ng-if="item.$isLoading === false"><i class="fa fa-check"></i> Created</span>
                     <span ng-if="item.$isLoading === true"><i class="fa fa-spinner fa-spin"></i> Creating...</span>

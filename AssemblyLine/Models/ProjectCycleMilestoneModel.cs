@@ -3,7 +3,7 @@ using AssemblyLine.DAL.Entities;
 
 namespace AssemblyLine.Models
 {
-    public class ProjectLineMilestoneModel
+    public class ProjectCycleMilestoneModel
     {
         public int Id { get; set; }
 

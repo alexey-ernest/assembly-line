@@ -16,7 +16,7 @@
                     templateUrl: 'lines.html',
                     controller: 'LinesCtrl',
                     data: {
-                        pageTitle: 'Assembly Lines at Melnikov Assembly Line Application',
+                        pageTitle: 'Assembly Lines',
                         roles: [userRoles.all]
                     }
                 })
@@ -25,7 +25,7 @@
                     templateUrl: 'lines.details.html',
                     controller: 'LineDetailsCtrl',
                     data: {
-                        pageTitle: 'Assembly Line Details at Melnikov Assembly Line Application',
+                        pageTitle: 'Assembly Line Details',
                         roles: [userRoles.all]
                     }
                 })
@@ -34,7 +34,7 @@
                     templateUrl: 'lines.create.html',
                     controller: 'LineCreateCtrl',
                     data: {
-                        pageTitle: 'New Assembly Line at Melnikov Assembly Line Application',
+                        pageTitle: 'New Assembly Line',
                         roles: [userRoles.all]
                     }
                 });

@@ -135,7 +135,7 @@ namespace AssemblyLine.Migrations
                         new CycleMilestone
                         {
                             Id = 2, 
-                            Name = "Manufacture", 
+                            Name = "Manufacturing", 
                             Position = 1,
                             Tasks =
                                 new[]
@@ -179,7 +179,7 @@ namespace AssemblyLine.Migrations
                         new CycleMilestone
                         {
                             Id = 3, 
-                            Name = "Validation", 
+                            Name = "Validating", 
                             Position = 2,
                             Tasks =
                                 new[]

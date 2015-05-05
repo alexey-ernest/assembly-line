@@ -16,6 +16,6 @@ namespace AssemblyLine.DAL.Entities
         public LineStatus Status { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<ProjectAssemblyLine> ProjectLines { get; set; }
+        public virtual ICollection<ProjectLine> ProjectLines { get; set; }
     }
 }

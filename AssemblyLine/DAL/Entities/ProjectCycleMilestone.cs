@@ -17,7 +17,7 @@ namespace AssemblyLine.DAL.Entities
 
         public MilestoneStatus Status { get; set; }
 
-        public virtual ProjectProductionCycle Cycle { get; set; }
+        public virtual ProjectLineCycle Cycle { get; set; }
 
         public virtual ICollection<ProjectMilestoneTask> Tasks { get; set; }
     }

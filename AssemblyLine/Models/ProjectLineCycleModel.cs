@@ -9,6 +9,6 @@ namespace AssemblyLine.Models
 
         public CycleStatus Status { get; set; }
 
-        public List<ProjectLineMilestoneListModel> Milestones { get; set; }
+        public List<ProjectCycleMilestoneListModel> Milestones { get; set; }
     }
 }

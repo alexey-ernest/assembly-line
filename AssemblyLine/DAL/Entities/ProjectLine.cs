@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace AssemblyLine.DAL.Entities
 {
-    public class ProjectAssemblyLine
+    public class ProjectLine
     {
         public int Id { get; set; }
 
@@ -19,6 +19,6 @@ namespace AssemblyLine.DAL.Entities
         public virtual AssemblyLineTeam ProcurementTeam { get; set; }
 
         [JsonIgnore]
-        public virtual ProjectProductionCycle Cycle { get; set; }
+        public virtual ProjectLineCycle Cycle { get; set; }
     }
 }

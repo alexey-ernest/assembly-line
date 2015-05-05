@@ -13,6 +13,7 @@ namespace AssemblyLine.DAL.Entities
         [Display(Name = "Name")]
         public string Name { get; set; }
 
+        [Required]
         [Display(Name = "Vehicle")]
         public virtual Vehicle Vehicle { get; set; }
 
@@ -24,7 +25,7 @@ namespace AssemblyLine.DAL.Entities
 
         [Display(Name = "Assembly Lines")]
         [JsonIgnore]
-        public virtual ICollection<ProjectAssemblyLine> AssemblyLines { get; set; }
+        public virtual ICollection<ProjectLine> AssemblyLines { get; set; }
 
         public DateTime Created { get; set; }
 

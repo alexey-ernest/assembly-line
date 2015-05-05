@@ -28,7 +28,10 @@ namespace AssemblyLine.BLL
                 throw new NotFoundException(string.Format("Could not find project with id: {0}.", id));
             }
 
-            // todo: check project status
+            if (project.Status != ProjectStatus.New)
+            {
+                throw new ForbiddenException("Project is already started.");
+            }
 
             var cycle = await _productionCycleRepository.GetAsync();
             if (cycle == null)
@@ -44,12 +47,14 @@ namespace AssemblyLine.BLL
             // Copying cycle into the project
             foreach (var line in project.AssemblyLines)
             {
-                var projectCycle = new ProjectProductionCycle
+                var projectCycle = new ProjectLineCycle
                 {
                     Milestones = new List<ProjectCycleMilestone>()
                 };
 
                 line.Cycle = projectCycle;
+                line.Line.Status = LineStatus.Busy;
+
                 project = await _projectRepository.EditAsync(project);
 
                 foreach (var milestone in cycle.Milestones)

@@ -1,4 +1,5 @@
 ﻿@using AssemblyLine.DAL.Entities
+@using AssemblyLine.Infrastructure.Helpers
 <script type="text/ng-template" id="projects.html">
 
     <h1>Projects <a class="btn btn-default" ui-sref="^.projectcreate"><i class="glyphicon glyphicon-plus"></i></a></h1>
@@ -18,21 +19,21 @@
 
     <h1>Project Details</h1>
 
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="update(itemForm, item)">
 
             <div class="form-group">
                 <label for="name">@Html.DisplayNameFor(x => new Project().Name)</label>
-                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
+                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" @Html.RequiredFor(x => new Project().Name) />
             </div>
 
             <div class="form-group">
                 <label for="vehicle">@Html.DisplayNameFor(x => new Project().Vehicle)</label>
-                <select id="vehicle" class="form-control" ng-model="item.vehicle" ng-options="v.name for v in vehicles"></select>
+                <select id="vehicle" class="form-control" ng-model="item.vehicle" ng-options="v.name for v in vehicles" @Html.RequiredFor(x => new Project().Vehicle)></select>
             </div>
             <div class="form-group">
                 <label for="vehicleNumber">@Html.DisplayNameFor(x => new Project().VehicleNumber)</label>
-                <input type="number" step="1" min="0" class="form-control" id="vehicleNumber" placeholder="" ng-model="item.vehicleNumber" />
+                <input type="number" step="1" min="0" class="form-control" id="vehicleNumber" placeholder="" ng-model="item.vehicleNumber" @Html.RequiredFor(x => new Project().VehicleNumber) />
             </div>
             <div class="form-group">
                 <label for="assemblyLinesNumber">@Html.DisplayNameFor(x => new Project().AssemblyLines)</label>
@@ -48,15 +49,15 @@
 
             <div class="form-group">
                 <label for="deliveryAddress">@Html.DisplayNameFor(x => new Project().DeliveryAddress)</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.deliveryAddress" ng-required />
+                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.deliveryAddress" @Html.RequiredFor(x => new Project().DeliveryAddress) />
             </div>
             <div class="form-group">
                 <label for="deliveryContactPerson">@Html.DisplayNameFor(x => new Project().DeliveryContactPerson)</label>
-                <input type="text" class="form-control" id="deliveryContactPerson" placeholder="" ng-model="item.deliveryContactPerson" />
+                <input type="text" class="form-control" id="deliveryContactPerson" placeholder="" ng-model="item.deliveryContactPerson" @Html.RequiredFor(x => new Project().DeliveryContactPerson) />
             </div>
             <div class="form-group">
                 <label for="deliveryPhone">@Html.DisplayNameFor(x => new Project().DeliveryPhone)</label>
-                <input type="text" class="form-control" id="deliveryPhone" placeholder="" ng-model="item.deliveryPhone" />
+                <input type="text" class="form-control" id="deliveryPhone" placeholder="" ng-model="item.deliveryPhone" @Html.RequiredFor(x => new Project().DeliveryPhone) />
             </div>
 
             <p>&nbsp;</p>
@@ -82,11 +83,11 @@
 
     <h1>Project Assembly Line: {{item.line.name}}</h1>
 
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="update(itemForm, item)">
 
             <div class="form-group">
-                <h3>@Html.DisplayNameFor(x => new ProjectAssemblyLine().ProductionTeam)</h3>
+                <h3>@Html.DisplayNameFor(x => new ProjectLine().ProductionTeam)</h3>
             </div>
 
             <div class="form-group">
@@ -107,7 +108,7 @@
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <div class="form-group">
-                <h3>@Html.DisplayNameFor(x => new ProjectAssemblyLine().ProcurementTeam)</h3>
+                <h3>@Html.DisplayNameFor(x => new ProjectLine().ProcurementTeam)</h3>
             </div>
             
             <div class="form-group">
@@ -133,7 +134,6 @@
                     <span ng-if="item.$isLoading === false"><i class="fa fa-check"></i> Saved</span>
                     <span ng-if="item.$isLoading === true"><i class="fa fa-spinner fa-spin"></i> Saving...</span>
                 </button>
-                <a href="#" class="btn btn-default" on-confirm-click confirm-click="delete(item)">Delete</a>
             </div>
 
         </form>
@@ -148,25 +148,25 @@
 
     <h1>New Project</h1>
     
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="create(itemForm, item)">
 
             <div class="form-group">
                 <label for="name">@Html.DisplayNameFor(x => new Project().Name)</label>
-                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" ng-required />
+                <input type="text" class="form-control" id="name" placeholder="" ng-model="item.name" @Html.RequiredFor(x => new Project().Name) />
             </div>
 
             <div class="form-group">
                 <label for="vehicle">@Html.DisplayNameFor(x => new Project().Vehicle)</label>
-                <select id="vehicle" class="form-control" ng-model="item.vehicle" ng-options="v.name for v in vehicles"></select>
+                <select id="vehicle" class="form-control" ng-model="item.vehicle" ng-options="v.name for v in vehicles" @Html.RequiredFor(x => new Project().Vehicle)></select>
             </div>
             <div class="form-group">
                 <label for="vehicleNumber">@Html.DisplayNameFor(x => new Project().VehicleNumber)</label>
-                <input type="number" step="1" min="0" class="form-control" id="vehicleNumber" placeholder="" ng-model="item.vehicleNumber" />
+                <input type="number" step="1" min="0" class="form-control" id="vehicleNumber" placeholder="" ng-model="item.vehicleNumber" @Html.RequiredFor(x => new Project().VehicleNumber) />
             </div>
             <div class="form-group">
                 <label for="assemblyLinesNumber">@Html.DisplayNameFor(x => new Project().AssemblyLinesNumber)</label>
-                <input type="number" step="1" min="0" class="form-control" id="assemblyLinesNumber" placeholder="" ng-model="item.assemblyLinesNumber" />
+                <input type="number" step="1" min="0" class="form-control" id="assemblyLinesNumber" placeholder="" ng-model="item.assemblyLinesNumber" @Html.RequiredFor(x => new Project().AssemblyLinesNumber) />
             </div>
 
             <p>&nbsp;</p>

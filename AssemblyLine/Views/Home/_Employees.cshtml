@@ -1,4 +1,5 @@
 ﻿@using AssemblyLine.DAL.Entities
+@using AssemblyLine.Infrastructure.Helpers
 <script type="text/ng-template" id="employees.html">
 
     <h1>Employees <a class="btn btn-default" ui-sref="^.employeecreate"><i class="glyphicon glyphicon-plus"></i></a></h1>
@@ -18,20 +19,20 @@
 
     <h1>Employee Details</h1>
 
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="update(itemForm, item)">
 
             <div class="form-group">
                 <label for="firstName">@Html.DisplayNameFor(x => new Employee().FirstName)</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" ng-model="item.firstName" ng-required />
+                <input type="text" class="form-control" id="firstName" placeholder="" ng-model="item.firstName" @Html.RequiredFor(x => new Employee().FirstName) />
             </div>
             <div class="form-group">
                 <label for="lastName">@Html.DisplayNameFor(x => new Employee().LastName)</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.lastName" ng-required />
+                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.lastName" @Html.RequiredFor(x => new Employee().LastName) />
             </div>
             <div class="form-group">
                 <label for="post">@Html.DisplayNameFor(x => new Employee().Post)</label>
-                <input type="text" class="form-control" id="post" placeholder="" ng-model="item.post" />
+                <input type="text" class="form-control" id="post" placeholder="" ng-model="item.post" @Html.RequiredFor(x => new Employee().Post) />
             </div>
 
             <p>&nbsp;</p>
@@ -56,20 +57,20 @@
 
     <h1>New Employee</h1>
 
-    <div class="col-sm-8">
+    <div class="col-sm-12">
         <form class="form-horizontal" ng-if="item" name="itemForm" ng-submit="create(itemForm, item)">
 
             <div class="form-group">
                 <label for="firstName">@Html.DisplayNameFor(x => new Employee().FirstName)</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" ng-model="item.firstName" ng-required />
+                <input type="text" class="form-control" id="firstName" placeholder="" ng-model="item.firstName" @Html.RequiredFor(x => new Employee().FirstName) />
             </div>
             <div class="form-group">
                 <label for="lastName">@Html.DisplayNameFor(x => new Employee().LastName)</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.lastName" ng-required />
+                <input type="text" class="form-control" id="lastName" placeholder="" ng-model="item.lastName" @Html.RequiredFor(x => new Employee().LastName) />
             </div>
             <div class="form-group">
                 <label for="post">@Html.DisplayNameFor(x => new Employee().Post)</label>
-                <input type="text" class="form-control" id="post" placeholder="" ng-model="item.post" />
+                <input type="text" class="form-control" id="post" placeholder="" ng-model="item.post" @Html.RequiredFor(x => new Employee().Post) />
             </div>
 
             <p>&nbsp;</p>

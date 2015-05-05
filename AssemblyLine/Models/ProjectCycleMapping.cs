@@ -8,7 +8,7 @@ namespace AssemblyLine.Models
     {
         public void CreateMap()
         {
-            Mapper.CreateMap<ProjectProductionCycle, ProjectLineCycleModel>()
+            Mapper.CreateMap<ProjectLineCycle, ProjectLineCycleModel>()
                 ;
         }
     }

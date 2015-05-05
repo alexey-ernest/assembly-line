@@ -1,13 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using AssemblyLine.Common.Exceptions;
 using AssemblyLine.DAL.Entities;
 
 namespace AssemblyLine.DAL.Repositories
 {
-    /// <summary>
-    /// Todo: implement
-    /// </summary>
     public class VehicleRepository : IVehicleRepository
     {
         private readonly ApplicationDbContext _db;
@@ -32,24 +29,43 @@ namespace AssemblyLine.DAL.Repositories
             return _db.Vehicles;
         }
 
-        public Task<Vehicle> GetAsync(int id)
+        public async Task<Vehicle> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _db.Vehicles.FindAsync(id);
         }
 
-        public Task<Vehicle> AddAsync(Vehicle entity)
+        public async Task<Vehicle> AddAsync(Vehicle entity)
         {
-            throw new NotImplementedException();
+            entity = _db.Vehicles.Add(entity);
+            await SaveChangesAsync();
+
+            return entity;
         }
 
-        public Task<Vehicle> EditAsync(Vehicle entity)
+        public async Task<Vehicle> EditAsync(Vehicle entity)
         {
-            throw new NotImplementedException();
+            var original = await _db.Vehicles.FindAsync(entity.Id);
+            if (original == null)
+            {
+                throw new NotFoundException(string.Format("Could not found object with id {0}", entity.Id));
+            }
+
+            _db.Entry(original).CurrentValues.SetValues(entity);
+            await SaveChangesAsync();
+
+            return original;
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _db.Vehicles.FindAsync(id);
+            if (entity == null)
+            {
+                throw new NotFoundException(string.Format("Could not found object with id {0}", id));
+            }
+
+            _db.Vehicles.Remove(entity);
+            await SaveChangesAsync();
         }
     }
 }

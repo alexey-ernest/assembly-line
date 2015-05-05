@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using AssemblyLine.Configuration;
+using AssemblyLine.Properties;
 
 namespace AssemblyLine.Controllers
 {
@@ -14,6 +15,8 @@ namespace AssemblyLine.Controllers
         [Route(Name = RouteNames.HomeMvc)]
         public ActionResult Index()
         {
+            ViewBag.Title = Settings.Default.ApplicationName;
+
             return View();
         }
     }

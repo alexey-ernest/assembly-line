@@ -16,7 +16,7 @@
                     templateUrl: 'employees.html',
                     controller: 'EmployeesCtrl',
                     data: {
-                        pageTitle: 'Employees at Melnikov Assembly Line Application',
+                        pageTitle: 'Employees',
                         roles: [userRoles.all]
                     }
                 })
@@ -25,7 +25,7 @@
                     templateUrl: 'employees.details.html',
                     controller: 'EmployeeDetailsCtrl',
                     data: {
-                        pageTitle: 'Employee Details at Melnikov Assembly Line Application',
+                        pageTitle: 'Employee Details',
                         roles: [userRoles.all]
                     }
                 })
@@ -34,7 +34,7 @@
                     templateUrl: 'employees.create.html',
                     controller: 'EmployeeCreateCtrl',
                     data: {
-                        pageTitle: 'New Employee at Melnikov Assembly Line Application',
+                        pageTitle: 'New Employee',
                         roles: [userRoles.all]
                     }
                 });
@@ -150,7 +150,7 @@
         '$scope', '$state', 'employeeService',
         function ($scope, $state, employeeService) {
 
-            $scope.item = employeeService.create({ firstName: null, lastName: null });
+            $scope.item = employeeService.create({ firstName: 'New Employee', lastName: 'Smith' });
             $scope.isLoading = false;
 
             $scope.create = function (form, item) {

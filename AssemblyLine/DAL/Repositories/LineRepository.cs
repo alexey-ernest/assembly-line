@@ -1,14 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using AssemblyLine.Common.Exceptions;
 using AssemblyLine.DAL.Entities;
 
 namespace AssemblyLine.DAL.Repositories
 {
-    /// <summary>
-    /// Todo: implement
-    /// </summary>
     public class LineRepository : ILineRepository
     {
         private readonly ApplicationDbContext _db;
@@ -33,14 +29,17 @@ namespace AssemblyLine.DAL.Repositories
             return _db.Lines;
         }
 
-        public Task<Line> GetAsync(int id)
+        public async Task<Line> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _db.Lines.FindAsync(id);
         }
 
-        public Task<Line> AddAsync(Line entity)
+        public async Task<Line> AddAsync(Line entity)
         {
-            throw new NotImplementedException();
+            entity = _db.Lines.Add(entity);
+            await SaveChangesAsync();
+
+            return entity;
         }
 
         public async Task<Line> EditAsync(Line entity)
@@ -57,9 +56,16 @@ namespace AssemblyLine.DAL.Repositories
             return original;
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _db.Lines.FindAsync(id);
+            if (entity == null)
+            {
+                throw new NotFoundException(string.Format("Could not found object with id {0}", id));
+            }
+
+            _db.Lines.Remove(entity);
+            await SaveChangesAsync();
         }
     }
 }

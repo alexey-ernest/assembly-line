@@ -31,7 +31,7 @@ namespace AssemblyLine.Controllers.Api.Projects
         public async Task<IEnumerable<ProjectLineListModel>> Get(int pid)
         {
             var entities = await _repository.GetByProjectAsync(pid);
-            return entities.Select(l => _mapper.Map<ProjectAssemblyLine, ProjectLineListModel>(l)).ToList();
+            return entities.Select(l => _mapper.Map<ProjectLine, ProjectLineListModel>(l)).ToList();
         }
 
         public async Task<ProjectLineModel> Get(int pid, int id)
@@ -42,10 +42,10 @@ namespace AssemblyLine.Controllers.Api.Projects
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            return _mapper.Map<ProjectAssemblyLine, ProjectLineModel>(entity);
+            return _mapper.Map<ProjectLine, ProjectLineModel>(entity);
         }
 
-        public async Task<HttpResponseMessage> Put(int pid, int id, ProjectAssemblyLine model)
+        public async Task<HttpResponseMessage> Put(int pid, int id, ProjectLine model)
         {
             if (model == null)
             {
