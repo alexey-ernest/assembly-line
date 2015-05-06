@@ -65,7 +65,7 @@ namespace AssemblyLine.DAL.Repositories
             var lines = await _db.Lines.OrderBy(l => l.Status).ToListAsync();
             if (lines.Count < number)
             {
-                throw new BadRequestException("Not enough assembly lines");
+                throw new ForbiddenException("Not enough assembly lines");
             }
 
             var projectLines = new List<ProjectLine>();

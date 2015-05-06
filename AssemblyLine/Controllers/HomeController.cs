@@ -1,9 +1,11 @@
 ﻿using System.Web.Mvc;
 using AssemblyLine.Configuration;
+using AssemblyLine.Infrastructure.Attributes.Mvc;
 using AssemblyLine.Properties;
 
 namespace AssemblyLine.Controllers
 {
+    [AuthorizeActiveDirectory(Groups = "Scientists")]
     [RoutePrefix("")]
     public class HomeController : Controller
     {
