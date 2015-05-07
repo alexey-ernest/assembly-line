@@ -12,7 +12,7 @@ using AssemblyLine.Infrastructure.Filters.Api;
 
 namespace AssemblyLine.Controllers.Api
 {
-    [ValidationHttp]
+    [ValidateModelHttp]
     [Route("api/vehicles/{id:int?}", Name = RouteNames.VehiclesApi)]
     public class VehiclesController : ApiController
     {

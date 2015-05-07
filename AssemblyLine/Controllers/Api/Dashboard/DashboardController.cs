@@ -15,7 +15,7 @@ using AssemblyLine.Models;
 
 namespace AssemblyLine.Controllers.Api.Dashboard
 {
-    [ValidationHttp]
+    [ValidateModelHttp]
     [RoutePrefix("api/dashboard")]
     public class DashboardController : ApiController
     {

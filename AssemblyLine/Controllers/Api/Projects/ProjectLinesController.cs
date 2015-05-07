@@ -14,7 +14,7 @@ using AssemblyLine.Models;
 
 namespace AssemblyLine.Controllers.Api.Projects
 {
-    [ValidationHttp]
+    [ValidateModelHttp]
     [Route("api/projects/{pid:int}/lines/{id:int?}", Name = RouteNames.ProjectLinesApi)]
     public class ProjectLinesController : ApiController
     {

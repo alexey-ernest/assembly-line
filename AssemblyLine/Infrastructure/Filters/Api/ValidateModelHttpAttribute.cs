@@ -10,9 +10,9 @@ namespace AssemblyLine.Infrastructure.Filters.Api
     /// <summary>
     ///     Validates model state and returs errors description.
     /// </summary>
-    public sealed class ValidationHttpAttribute : ActionFilterAttribute
+    public sealed class ValidateModelHttpAttribute : ActionFilterAttribute
     {
-        public ValidationHttpAttribute()
+        public ValidateModelHttpAttribute()
         {
             BadRequestText = "Bad request.";
         }

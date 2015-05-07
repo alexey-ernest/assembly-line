@@ -14,7 +14,7 @@ using AssemblyLine.Models;
 
 namespace AssemblyLine.Controllers.Api
 {
-    [ValidationHttp]
+    [ValidateModelHttp]
     [Route("api/employees/{id:int?}", Name = RouteNames.EmployeeApi)]
     public class EmployeesController : ApiController
     {

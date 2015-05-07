@@ -8,7 +8,7 @@ using AssemblyLine.Infrastructure.Filters.Api;
 
 namespace AssemblyLine.Controllers.Api.Projects
 {
-    [ValidationHttp]
+    [ValidateModelHttp]
     [Route("api/projects/{id:int}/cycle", Name = RouteNames.ProjectCycleApi)]
     public class ProjectCycleController : ApiController
     {

@@ -11,7 +11,7 @@ using AssemblyLine.Infrastructure.Filters.Api;
 
 namespace AssemblyLine.Controllers.Api
 {
-    [ValidationHttp]
+    [ValidateModelHttp]
     [Route("api/users/{id?}", Name = RouteNames.UsersApi)]
     public class UsersController : ApiController
     {
