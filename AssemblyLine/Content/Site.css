@@ -33,7 +33,8 @@
     }
 }
 
-.field-validation-error {
+.field-validation-error,
+.validation-summary-errors {
     color: #ff1493
 }
 
