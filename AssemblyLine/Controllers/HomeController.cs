@@ -1,10 +1,11 @@
 ﻿using System.Web.Mvc;
 using AssemblyLine.Configuration;
+using AssemblyLine.Constants;
 using AssemblyLine.Properties;
 
 namespace AssemblyLine.Controllers
 {
-    [Authorize(Roles = "Scientists")]
+    [Authorize(Roles = UserRoles.Engineers)]
     [RoutePrefix("")]
     public class HomeController : Controller
     {
