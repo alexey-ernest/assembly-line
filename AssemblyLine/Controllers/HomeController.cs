@@ -35,10 +35,6 @@ namespace AssemblyLine.Controllers
                 var userRoles = _userRepository.GetUserRoles(User.Identity.Name);
                 vm.UserRoles = userRoles;
             }
-            else
-            {
-                vm.UserRoles = new string[] {};
-            }
 
             return View(vm);
         }

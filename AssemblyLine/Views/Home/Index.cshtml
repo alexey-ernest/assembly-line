@@ -30,7 +30,8 @@
 
     <script>
         angular.module('assemblyLine').config(['user', function (user) {
-            user.roles = [@string.Join(",", Model.UserRoles.Select(r => string.Format("'{0}'", r)))];
+            user.id = '@User.Identity.Name';
+            user.roles = [@Html.Raw(string.Join(",", Model.UserRoles.Select(r => string.Format("'{0}'", r))))];
         }]);
     </script>
 }

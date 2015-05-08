@@ -6,10 +6,12 @@
     module.factory('authService', [
         'user', 'userRoles', function(user, userRoles) {
 
+            function isAuthenticated() {
+                return !!user.id;
+            }
+
             return {
-                isAuthenticated: function() {
-                    return !!user.id;
-                },
+                isAuthenticated: isAuthenticated,
                 isAuthorized: function(authorizedRoles) {
                     if (!angular.isArray(authorizedRoles)) {
                         authorizedRoles = [authorizedRoles];
@@ -19,7 +21,7 @@
                     }
 
                     var roles = user.roles || [];
-                    if (!service.isAuthenticated() || !roles.length) {
+                    if (!isAuthenticated() || !roles.length) {
                         return false;
                     }
                     

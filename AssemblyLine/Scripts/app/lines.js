@@ -17,7 +17,7 @@
                     controller: 'LinesCtrl',
                     data: {
                         pageTitle: 'Assembly Lines',
-                        roles: [userRoles.all]
+                        roles: [userRoles.sales]
                     }
                 })
                 .state('app.linedetails', {
