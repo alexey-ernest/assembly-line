@@ -1,7 +1,11 @@
 ﻿(function(window, angular) {
     'use strict';
 
-    var module = angular.module('services', ['ngResource']);
+    var module = angular.module('services', [
+        'services.auth',
+        'services.exceptions',
+        'ngResource'
+    ]);
 
     function buildODataQueryParams(filter, customParams) {
 
@@ -42,20 +46,6 @@
         return params;
     }
 
-    module.factory('$exceptionHandler', [
-        function() {
-            return function(exception) {
-
-                var message = exception.message;
-                if (message === '[object Object]') {
-                    message = 'Unknown Error';
-                }
-
-                alert(message);
-            };
-        }
-    ]);
-
     module.factory('employeeService', [
         '$resource', '$q', function($resource, $q) {
 
@@ -71,12 +61,12 @@
                 create: function(options) {
                     return new resource(options);
                 },
-                get: function (id) {
+                get: function(id) {
                     var deferred = $q.defer();
 
-                    resource.get({ id: id }, function (data) {
+                    resource.get({ id: id }, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
@@ -88,7 +78,7 @@
                     var params = buildODataQueryParams(filter, { 'name': "substringof('%',FirstName) or substringof('%',LastName)" });
 
                     var deferred = $q.defer();
-                    resource.query(params, function (data) {
+                    resource.query(params, function(data) {
                         deferred.resolve(data);
                     }, function() {
                         deferred.reject();
@@ -101,7 +91,7 @@
     ]);
 
     module.factory('vehicleService', [
-        '$resource', '$q', function ($resource, $q) {
+        '$resource', '$q', function($resource, $q) {
 
             var url = '/api/vehicles';
             var resource = $resource(url + '/:id',
@@ -112,29 +102,29 @@
 
 
             return {
-                create: function (options) {
+                create: function(options) {
                     return new resource(options);
                 },
-                get: function (id) {
+                get: function(id) {
                     var deferred = $q.defer();
 
-                    resource.get({ id: id }, function (data) {
+                    resource.get({ id: id }, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
                     return deferred.promise;
                 },
-                query: function (filter) {
+                query: function(filter) {
 
                     filter = filter || {};
                     var params = buildODataQueryParams(filter, { 'name': "substringof('%',Name)" });
 
                     var deferred = $q.defer();
-                    resource.query(params, function (data) {
+                    resource.query(params, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
@@ -145,7 +135,7 @@
     ]);
 
     module.factory('lineService', [
-        '$resource', '$q', function ($resource, $q) {
+        '$resource', '$q', function($resource, $q) {
 
             var url = '/api/lines';
             var resource = $resource(url + '/:id',
@@ -156,29 +146,29 @@
 
 
             return {
-                create: function (options) {
+                create: function(options) {
                     return new resource(options);
                 },
-                get: function (id) {
+                get: function(id) {
                     var deferred = $q.defer();
 
-                    resource.get({ id: id }, function (data) {
+                    resource.get({ id: id }, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
                     return deferred.promise;
                 },
-                query: function (filter) {
+                query: function(filter) {
 
                     filter = filter || {};
                     var params = buildODataQueryParams(filter, { 'name': "substringof('%',Name)" });
-                    
+
                     var deferred = $q.defer();
-                    resource.query(params, function (data) {
+                    resource.query(params, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
@@ -189,7 +179,7 @@
     ]);
 
     module.factory('projectService', [
-        '$resource', '$q', function ($resource, $q) {
+        '$resource', '$q', function($resource, $q) {
 
             var url = '/api/projects';
             var resource = $resource(url + '/:id',
@@ -200,29 +190,29 @@
 
 
             return {
-                create: function (options) {
+                create: function(options) {
                     return new resource(options);
                 },
-                get: function (id) {
+                get: function(id) {
                     var deferred = $q.defer();
 
-                    resource.get({ id: id }, function (data) {
+                    resource.get({ id: id }, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
                     return deferred.promise;
                 },
-                query: function (filter) {
+                query: function(filter) {
 
                     filter = filter || {};
                     var params = buildODataQueryParams(filter, { 'name': "substringof('%',Name)", 'active': "Status eq 'InProgress'" });
 
                     var deferred = $q.defer();
-                    resource.query(params, function (data) {
+                    resource.query(params, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
@@ -233,7 +223,7 @@
     ]);
 
     module.factory('projectLineService', [
-        '$resource', '$q', function ($resource, $q) {
+        '$resource', '$q', function($resource, $q) {
 
             var resource = $resource('/api/projects/:pid/lines/:id',
             { pid: '@pid', id: '@id' },
@@ -243,27 +233,27 @@
 
 
             return {
-                get: function (pid, id) {
+                get: function(pid, id) {
                     var deferred = $q.defer();
 
-                    resource.get({ pid: pid, id: id }, function (data) {
+                    resource.get({ pid: pid, id: id }, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
                     return deferred.promise;
                 },
-                query: function (pid, filter) {
+                query: function(pid, filter) {
 
                     filter = filter || {};
                     var params = buildODataQueryParams(filter);
                     params.pid = pid;
-                    
+
                     var deferred = $q.defer();
-                    resource.query(params, function (data) {
+                    resource.query(params, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 
@@ -274,18 +264,18 @@
     ]);
 
     module.factory('projectCycleService', [
-        '$resource', '$q', function ($resource, $q) {
+        '$resource', '$q', function($resource, $q) {
 
             var resource = $resource('/api/projects/:id/cycle', { id: '@id' });
 
             return {
-                kickOff: function (id) {
+                kickOff: function(id) {
 
                     var deferred = $q.defer();
 
-                    resource.save({id: id}, function () {
+                    resource.save({ id: id }, function() {
                         deferred.resolve();
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
                     return deferred.promise;
@@ -295,10 +285,10 @@
     ]);
 
     module.factory('dashboardService', [
-        '$resource', '$q', function ($resource, $q) {
+        '$resource', '$q', function($resource, $q) {
 
             return {
-                queryProjectStatuses: function (filter) {
+                queryProjectStatuses: function(filter) {
 
                     var resource = $resource('/api/dashboard/projects');
 
@@ -306,9 +296,9 @@
                     var params = buildODataQueryParams(filter, { 'active': "Status eq 'InProgress'" });
 
                     var deferred = $q.defer();
-                    resource.query(params, function (data) {
+                    resource.query(params, function(data) {
                         deferred.resolve(data);
-                    }, function () {
+                    }, function() {
                         deferred.reject();
                     });
 

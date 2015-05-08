@@ -29,9 +29,9 @@ namespace AssemblyLine.Controllers.Api
             return entities;
         }
 
-        public async Task<User> Get(string id)
+        public User Get(string id)
         {
-            User entity = await _repository.GetAsync(id);
+            User entity = _repository.Get(id);
             if (entity == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));

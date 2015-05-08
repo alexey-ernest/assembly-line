@@ -226,12 +226,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\InitializersConfig.cs" />
     <Compile Include="App_Start\JsonConfig.cs" />
     <Compile Include="App_Start\MappingConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\IoCConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
@@ -309,6 +307,7 @@
     <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Mappings\MilestoneTaskMapping.cs" />
     <Compile Include="Mappings\ProjectLineMapping.cs" />
+    <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\ProjectMapping.cs" />
     <Compile Include="Mappings\ProjectMilestoneMapping.cs" />
     <Compile Include="Mappings\ProjectMilestoneTaskMapping.cs" />
@@ -376,6 +375,7 @@
     <Compile Include="Models\AssemblyLineModel.cs" />
     <Compile Include="Models\AssemblyLineTeamModel.cs" />
     <Compile Include="Models\EmployeeListModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="Models\ProjectMilestoneTaskListModel.cs" />
@@ -394,7 +394,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -430,8 +429,10 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\auth-service.js" />
     <Content Include="Scripts\app\constants.js" />
     <Content Include="Scripts\app\directives.js" />
+    <Content Include="Scripts\app\exception-service.js" />
     <Content Include="Scripts\app\projects.js" />
     <Content Include="Scripts\app\lines.js" />
     <Content Include="Scripts\app\vehicles.js" />

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AssemblyLine;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(AssemblyLine.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
 
 namespace AssemblyLine
 {
-    public partial class Startup
+    public class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
         }
     }
 }

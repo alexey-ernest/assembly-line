@@ -1,60 +1,45 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web.Security;
 using AssemblyLine.DAL.Entities;
-using Microsoft.AspNet.Identity.EntityFramework;
+using AssemblyLine.Mappings;
 
 namespace AssemblyLine.DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IMapper _mapper;
 
-        public UserRepository(ApplicationDbContext db)
+        public UserRepository(IMapper mapper)
         {
-            _db = db;
-        }
-
-
-        public void Dispose()
-        {
-            _db.Dispose();
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await _db.SaveChangesAsync();
+            _mapper = mapper;
         }
 
         public IQueryable<User> AsQueryable()
         {
-            return _db.Users;
+            var membershipUsers = new MembershipUser[] {};
+            Membership.GetAllUsers().CopyTo(membershipUsers, 0);
+
+            IEnumerable<User> users = membershipUsers.Select(u => _mapper.Map<MembershipUser, User>(u));
+            return users.AsQueryable();
         }
 
-        public Task<User> GetAsync(string id)
+        public User Get(string id)
         {
-            return _db.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return AsQueryable().FirstOrDefault(u => u.Id == id);
         }
 
         public IQueryable<User> GetUsersInRole(string roleName)
         {
-            // todo: WindowsTokenRoleProvider
-
-            IdentityRole role = _db.Roles.FirstOrDefault(r => r.Name == roleName);
-            if (role == null)
-            {
-                return new List<User>().AsQueryable();
-            }
-
-            return _db.Users.Where(u => u.Roles.Any(r => r.RoleId == role.Id));
+            string[] userIds = Roles.GetUsersInRole(roleName);
+            IQueryable<User> users = AsQueryable().Where(u => userIds.Contains(u.Id));
+            return users;
         }
 
-        public async Task<string[]> GetUserRolesAsync(string id)
+        public string[] GetUserRoles(string id)
         {
-            string[] userRoleIds =
-                await _db.Users.Where(u => u.Id == id).SelectMany(u => u.Roles.Select(ur => ur.RoleId)).ToArrayAsync();
-            return await _db.Roles.Where(r => userRoleIds.Contains(r.Id)).Select(r => r.Name).ToArrayAsync();
+            string[] roles = Roles.GetRolesForUser(id);
+            return roles;
         }
     }
 }

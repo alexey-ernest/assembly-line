@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 using AssemblyLine.Configuration;
 using AssemblyLine.Constants;
+using AssemblyLine.DAL.Repositories;
+using AssemblyLine.Models;
 using AssemblyLine.Properties;
 
 namespace AssemblyLine.Controllers
@@ -9,6 +12,13 @@ namespace AssemblyLine.Controllers
     [RoutePrefix("")]
     public class HomeController : Controller
     {
+        private readonly IUserRepository _userRepository;
+
+        public HomeController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         [Route("employees/{*url}")]
         [Route("vehicles/{*url}")]
         [Route("projects/{*url}")]
@@ -19,7 +29,18 @@ namespace AssemblyLine.Controllers
         {
             ViewBag.Title = Settings.Default.ApplicationName;
 
-            return View();
+            var vm = new HomeViewModel();
+            if (Request.IsAuthenticated)
+            {
+                var userRoles = _userRepository.GetUserRoles(User.Identity.Name);
+                vm.UserRoles = userRoles;
+            }
+            else
+            {
+                vm.UserRoles = new string[] {};
+            }
+
+            return View(vm);
         }
     }
 }

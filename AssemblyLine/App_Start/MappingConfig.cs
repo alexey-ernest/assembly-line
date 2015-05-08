@@ -19,6 +19,7 @@ namespace AssemblyLine
             container.RegisterType<IMapping, ProjectCycleMapping>("ProjectCycleMapping", new ContainerControlledLifetimeManager());
             container.RegisterType<IMapping, MilestoneTaskMapping>("MilestoneTaskMapping", new ContainerControlledLifetimeManager());
             container.RegisterType<IMapping, ProjectMilestoneTaskMapping>("ProjectMilestoneTaskMapping", new ContainerControlledLifetimeManager());
+            container.RegisterType<IMapping, UserMapping>("UserMapping", new ContainerControlledLifetimeManager());
 
             var mappings = container.ResolveAll<IMapping>();
             foreach (var mapping in mappings)
